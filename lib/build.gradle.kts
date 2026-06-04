@@ -9,6 +9,8 @@ repositories {
 
 dependencies {
     implementation 'org.mongodb:mongodb-driver-sync:5.2.1'
+    // Source: https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
+testImplementation("org.junit.jupiter:junit-jupiter-api:6.0.3")
 }
 
 javafx {
@@ -19,3 +21,4 @@ javafx {
 application {
     mainClass = 'application.Main'
 }
+
