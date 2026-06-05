@@ -26,3 +26,11 @@ application {
 tasks.test {
     useJUnitPlatform()
 }
+sourceSets {
+    main {
+        resources {
+            srcDirs("src/main/java")
+            include("**/*.fxml", "**/*.css", "**/*.png", "**/*.jpg")
+        }
+    }
+}
