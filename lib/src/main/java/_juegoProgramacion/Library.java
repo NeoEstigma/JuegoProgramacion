@@ -1,4 +1,4 @@
-package _JuegoProgramacion;
+package _juegoProgramacion;
 
 public class Library {
 	    public boolean someLibraryMethod() {

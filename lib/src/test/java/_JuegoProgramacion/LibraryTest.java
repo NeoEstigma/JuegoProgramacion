@@ -4,6 +4,9 @@
 package _JuegoProgramacion;
 
 import org.junit.jupiter.api.Test;
+
+import _juegoProgramacion.Library;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class LibraryTest {
