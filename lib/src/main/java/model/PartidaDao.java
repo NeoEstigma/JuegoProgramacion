@@ -45,7 +45,7 @@ public class PartidaDao {
 
 		return new Document().append("jugador", p.getJugador()).append("dataPoints", p.getDp())
 				.append("dpPorSegundo", p.getDpPorSegundo()).append("nivel", p.getNivel()).append("mejoras", mejDoc)
-				.append("tiempoPartida", p.getTiempoPartida()).append("fechaGuardado", p.getFechaGuardado());
+				.append("tiempoPartida", p.getTiempoPartida()).append("fechaInicio", p.getFechaInicio());
 	}
 
 	// Convierte Document de MongoDB a Partida
@@ -55,8 +55,8 @@ public class PartidaDao {
 				mejDoc.getInteger("numJunior", 0), mejDoc.getInteger("numSenior", 0),
 				mejDoc.getInteger("numMaqCafe", 0), mejDoc.getInteger("numRGBS", 0));
 
-		return new Partida(doc.getString("jugador"), doc.getInteger("dataPoints", 0), doc.getInteger("dpPorSegundo", 0),
-				doc.getInteger("nivel", 1), mejoras, doc.getInteger("tiempoPartida", 0),
-				doc.getString("fechaGuardado"));
+		return new Partida(doc.getString("jugador"), doc.getInteger("dataPoints", 0), doc.getInteger("nivel", 1),
+				doc.getInteger("dpPorSegundo", 0), mejoras,
+				doc.getLong("tiempoPartida") != null ? doc.getLong("tiempoPartida") : 0L, doc.getDate("fechaInicio"));
 	}
 }

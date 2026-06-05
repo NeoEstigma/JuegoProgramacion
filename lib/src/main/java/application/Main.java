@@ -14,13 +14,8 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 
 		try {
-
-            URL fxml = getClass().getResource("/View/Game.fxml");
-            System.out.println("FXML = " + fxml);
-
-			URL fxml = getClass().getResource("/View/Menu.fxml");
+			URL fxml = getClass().getResource("/View/Game.fxml");
 			System.out.println("FXML = " + fxml);
-
 
 			URL css = getClass().getResource("/View/style.css");
 			System.out.println("CSS = " + css);
@@ -34,15 +29,9 @@ public class Main extends Application {
 				scene.getStylesheets().add(css.toExternalForm());
 			}
 
-<<<<<<< HEAD
-            primaryStage.setTitle("Juego");
-            primaryStage.setScene(scene);
-            primaryStage.show();
-=======
-			primaryStage.setTitle("Menu");
+			primaryStage.setTitle("Terminal Clicker");
 			primaryStage.setScene(scene);
 			primaryStage.show();
->>>>>>> 8c0ee165021d914dfc1ee27733bbb7e01f018ec5
 
 		} catch (Exception e) {
 
