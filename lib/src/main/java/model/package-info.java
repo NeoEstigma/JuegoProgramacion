@@ -1,1 +1,1 @@
-package Model;
+package model;

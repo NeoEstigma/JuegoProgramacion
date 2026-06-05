@@ -1,1 +1,1 @@
-package _JuegoProgramacion;
+package _juegoProgramacion;
