@@ -11,19 +11,22 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="750" prefWidth="1200" stylesheets="@style.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.GameController">
+<BorderPane prefHeight="750" prefWidth="1200" stylesheets="@style.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GameController">
 
     <top>
         <VBox spacing="10" styleClass="top-panel">
-
             <HBox alignment="CENTER_LEFT" spacing="10">
                 <Label styleClass="dot-red" text="●" />
                 <Label styleClass="dot-yellow" text="●" />
                 <Label styleClass="dot-green" text="●" />
 
                 <VBox spacing="0">
-                    <Label fx:id="lblTitulo" styleClass="app-title" text="TERMINAL CLICKER" />
+                    <Label fx:id="lblTitulo" styleClass="app-title" text="TERMINAL CLICKER">
+                  <VBox.margin>
+                     <Insets top="10.0" />
+                  </VBox.margin></Label>
                     <HBox spacing="4">
                         <Label fx:id="lblEstadoTexto" styleClass="status-text" text="Infiltracion activa - operador:" />
                         <Label fx:id="lblOperador" styleClass="status-text" text="neo" />
@@ -42,21 +45,29 @@
                   <Insets right="10.0" />
                </HBox.margin>
                 </MenuButton>
+            <VBox.margin>
+               <Insets left="10.0" />
+            </VBox.margin>
             </HBox>
 
             <HBox spacing="50">
-
-                <VBox>
-                    <Label text="DATA POINTS" />
-                    <HBox spacing="4">
+                <VBox prefHeight="35.0" prefWidth="172.0">
+                    <Label text="DATA POINTS">
+                  <font>
+                     <Font size="19.0" />
+                  </font></Label>
+                    <HBox prefHeight="17.0" prefWidth="0.0" spacing="4">
                         <Label fx:id="lblDataPoints" text="0" />
                         <Label text="DP" />
                     </HBox>
                 </VBox>
 
                 <VBox>
-                    <Label text="PRODUCCION" />
-                    <HBox spacing="4">
+                    <Label prefHeight="17.0" prefWidth="179.0" text="PRODUCCION">
+                  <font>
+                     <Font size="19.0" />
+                  </font></Label>
+                    <HBox prefHeight="17.0" prefWidth="149.0" spacing="4">
                         <Label fx:id="lblDpSegundo" text="0" />
                         <Label text="DP/s" />
                     </HBox>
@@ -65,18 +76,19 @@
                 <Region HBox.hgrow="ALWAYS" />
 
                 <VBox>
-                    <Label text="NIVEL DE ACCESO" />
+                    <Label text="NIVEL DE ACCESO">
+                  <padding>
+                     <Insets right="10.0" />
+                  </padding></Label>
                     <HBox spacing="4">
                         <Label text="Nivel" />
                         <Label fx:id="lblNivel" text="1" />
                     </HBox>
-               <HBox.margin>
-                  <Insets right="10.0" />
-               </HBox.margin>
                 </VBox>
-
+            <VBox.margin>
+               <Insets left="10.0" />
+            </VBox.margin>
             </HBox>
-
         </VBox>
     </top>
 
@@ -84,15 +96,23 @@
         <HBox spacing="15">
 
             <VBox spacing="10" HBox.hgrow="ALWAYS">
-                <Label text="Terminal.exe" />
+                <Label text="Terminal.exe">
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="16.0" />
+               </font></Label>
 
-                <TextArea fx:id="terminalArea" editable="false" prefHeight="500" wrapText="true" />
+                <TextArea fx:id="terminalArea" editable="false" prefHeight="500" wrapText="true">
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin></TextArea>
 
                 <Button fx:id="btnClick" maxWidth="Infinity" onAction="#clickHack" prefHeight="120" styleClass="hack-button">
 
                     <graphic>
                         <VBox alignment="CENTER" spacing="5">
-
                             <Label fx:id="lblHackTexto" styleClass="hack-small" text="[ PULSA PARA HACKEAR ]" />
 
                             <Label fx:id="lblComando" styleClass="hack-main" text="&gt;_ ejecutar comando" />
@@ -102,7 +122,6 @@
                                 <Label fx:id="lblDpPorClick" styleClass="hack-dp" text="1" />
                                 <Label styleClass="hack-dp" text="DP por clic" />
                             </HBox>
-
                         </VBox>
                     </graphic>
 
@@ -119,11 +138,11 @@
                 <Button fx:id="btnRaspberry" maxWidth="Infinity" onAction="#comprarRaspberry">
                     <graphic>
                         <VBox alignment="CENTER_LEFT">
-                            <Label fx:id="lblRaspberryNombre" text="loop.sh" />
+                            <Label fx:id="lblRaspberryNombre" text="raspberry.sh" />
                             <HBox spacing="4">
                                 <Label text="+" />
                                 <Label fx:id="lblRaspberryValor" text="1" />
-                                <Label fx:id="lblRaspberryTipo" text="DP/s" />
+                                <Label fx:id="lblRaspberryTipo" prefHeight="17.0" prefWidth="48.0" text="DP/click" />
                             </HBox>
                             <HBox spacing="4">
                                 <Label fx:id="lblRaspberryPrecio" text="50" />
@@ -140,11 +159,11 @@
                 <Button fx:id="btnPc" maxWidth="Infinity" onAction="#comprarPc">
                     <graphic>
                         <VBox alignment="CENTER_LEFT">
-                            <Label fx:id="lblPcNombre" text="brute.py" />
+                            <Label fx:id="lblPcNombre" text="pc.py" />
                             <HBox spacing="4">
                                 <Label text="+" />
                                 <Label fx:id="lblPcValor" text="5" />
-                                <Label fx:id="lblPcTipo" text="DP/s" />
+                                <Label fx:id="lblPcTipo" prefHeight="17.0" prefWidth="58.0" text="DP/click" />
                             </HBox>
                             <HBox spacing="4">
                                 <Label fx:id="lblPcPrecio" text="200" />
@@ -207,7 +226,7 @@
                             <HBox spacing="4">
                                 <Label text="+" />
                                 <Label fx:id="lblCafeValor" text="3" />
-                                <Label fx:id="lblCafeTipo" text="% produccion" />
+                                <Label fx:id="lblCafeTipo" text="porcentaje produccion" />
                             </HBox>
                             <HBox spacing="4">
                                 <Label fx:id="lblCafePrecio" text="2500" />
@@ -228,7 +247,7 @@
                             <HBox spacing="4">
                                 <Label text="+" />
                                 <Label fx:id="lblRgbsValor" text="10" />
-                                <Label fx:id="lblRgbsTipo" text="% produccion" />
+                                <Label fx:id="lblRgbsTipo" text="porcentaje produccion" />
                             </HBox>
                             <HBox spacing="4">
                                 <Label fx:id="lblRgbsPrecio" text="5000" />
