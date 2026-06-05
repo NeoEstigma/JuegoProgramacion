@@ -16,6 +16,19 @@ public class PartidaDao {
 		this.coleccion = db.getCollection("partidas");
 	}
 
+	public void eliminarUnica() {
+		coleccion.deleteMany(new Document());
+	}
+
+	// Devuelve la única partida guardada, sin importar el nombre
+	public Partida cargarUnica() {
+		Document doc = coleccion.find().first();
+		if (doc == null) {
+			return null;
+		}
+		return documentToPartida(doc);
+	}
+
 	// Guarda o sobreescribe la partida del jugador (upsert)
 	public void guardar(Partida partida) {
 		Document doc = partidaToDocument(partida);
