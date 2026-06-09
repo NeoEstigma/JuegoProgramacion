@@ -46,22 +46,19 @@ public class GameController {
 
 	@FXML
 	public void initialize() {
-		Partida partida = Partida.getInstancia();
-		PartidaDao dao = new PartidaDao();
-		partida = dao.cargarUnica();
+		partida = Partida.getInstancia();
+		System.out.println("GameController instancia: " + partida);
+		System.out.println("Jugador: " + (partida != null ? partida.getJugador() : "NULL"));
 
 		if (partida == null) {
-			partida = new Partida();
-			terminalArea.appendText("Nueva partida creada...\n");
-		} else {
-			terminalArea.appendText("Partida cargada correctamente...\n");
+			terminalArea.appendText("Error: no hay partida iniciada\n");
+			return;
 		}
 
 		iniciarTimeline();
-
 		terminalArea.appendText("Sistema iniciado...\n");
+		terminalArea.appendText("> Operador: " + partida.getJugador() + "\n");
 		terminalArea.appendText("> Rango actual: " + partida.getNombreNivel() + "\n");
-
 		actualizarVista();
 	}
 
@@ -73,7 +70,7 @@ public class GameController {
 
 	private void iniciarTimeline() {
 		produccionPasiva = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
-			if (!partida.estaTerminado()) {
+			if (partida != null && !partida.estaTerminado()) {
 				partida.tickSegundo();
 				actualizarVista();
 			}

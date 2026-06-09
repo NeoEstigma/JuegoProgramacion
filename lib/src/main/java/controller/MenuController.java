@@ -30,13 +30,13 @@ public class MenuController {
 
 	@FXML
 	private void continuarPartida() {
-		// Carga directamente la partida guardada
+		Partida guardada = partidaDao.cargarUnica();
+		Partida.setInstancia(guardada);
 		cargarVista("/View/Game.fxml");
 	}
 
 	@FXML
 	private void nuevaPartida() {
-		// Popup para pedir el nombre
 		TextInputDialog dialog = new TextInputDialog();
 		dialog.setTitle("Nueva partida");
 		dialog.setHeaderText(null);
@@ -45,11 +45,8 @@ public class MenuController {
 		Optional<String> resultado = dialog.showAndWait();
 		resultado.ifPresent(nombre -> {
 			if (!nombre.trim().isEmpty()) {
-				// Borra la partida anterior si existe
 				partidaDao.eliminarUnica();
-				// When the player enters their name and starts the game:
-				Partida.nuevaPartida(nombre);
-				// Carga la vista del juego
+				Partida.nuevaPartida(nombre.trim());
 				cargarVista("/View/Game.fxml");
 			}
 		});
@@ -76,7 +73,9 @@ public class MenuController {
 			stage.setScene(scene);
 		} catch (IOException e) {
 			System.out.println("Error al cargar vista: " + e.getMessage());
+			e.printStackTrace();
 		}
+
 	}
 
 }
