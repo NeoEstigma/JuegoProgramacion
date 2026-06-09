@@ -16,70 +16,78 @@ import model.PartidaDao;
 
 public class MenuController {
 
-	@FXML
-	private Button btnContinuar;
+    @FXML
+    private Button btnContinuar;
 
-	private PartidaDao partidaDao = new PartidaDao();
+    private PartidaDao partidaDao = new PartidaDao();
 
-	@FXML
-	public void initialize() {
-		// Activa continuar solo si hay una partida guardada
-		Partida guardada = partidaDao.cargarUnica();
-		btnContinuar.setDisable(guardada == null);
-	}
+    @FXML
+    public void initialize() {
+        Partida guardada = partidaDao.cargarUnica();
+        btnContinuar.setDisable(guardada == null);
+    }
 
-	@FXML
-	private void continuarPartida() {
-		Partida guardada = partidaDao.cargarUnica();
-		Partida.setInstancia(guardada);
-		cargarVista("/View/Game.fxml");
-	}
+    @FXML
+    private void continuarPartida() {
+        Partida guardada = partidaDao.cargarUnica();
 
-	@FXML
-	private void nuevaPartida() {
-		TextInputDialog dialog = new TextInputDialog();
-		dialog.setTitle("Nueva partida");
-		dialog.setHeaderText(null);
-		dialog.setContentText("Introduce tu nombre:");
+        if (guardada != null) {
+            Partida.setInstancia(guardada);
+            cargarVista("/View/Game.fxml");
+        }
+    }
 
-		Optional<String> resultado = dialog.showAndWait();
-		resultado.ifPresent(nombre -> {
-			if (!nombre.trim().isEmpty()) {
-				partidaDao.eliminarUnica();
-<<<<<<< HEAD
-				Partida.nuevaPartida(nombre.trim());
-=======
-				// Carga la vista del juego
->>>>>>> e69874501bd07f31b86e830068bfdf7014f7fde5
-				cargarVista("/View/Game.fxml");
-			}
-		});
-	}
+    @FXML
+    private void nuevaPartida() {
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("Nueva partida");
+        dialog.setHeaderText(null);
+        dialog.setContentText("Introduce tu nombre:");
 
-	@FXML
-	private void mostrarRanking() {
-		cargarVista("/View/Ranking.fxml");
-	}
+        Optional<String> resultado = dialog.showAndWait();
 
-	@FXML
-	private void salir() {
-		Stage stage = (Stage) btnContinuar.getScene().getWindow();
-		stage.close();
-	}
+        resultado.ifPresent(nombre -> {
+            String nombreLimpio = nombre.trim();
 
-	private void cargarVista(String ruta) {
-		try {
-			URL fxml = getClass().getResource(ruta);
-			FXMLLoader loader = new FXMLLoader(fxml);
-			Parent root = loader.load();
-			Scene scene = new Scene(root);
-			Stage stage = (Stage) btnContinuar.getScene().getWindow();
-			stage.setScene(scene);
-		} catch (IOException e) {
-			System.out.println("Error al cargar vista: " + e.getMessage());
-			e.printStackTrace();
-		}
+            if (!nombreLimpio.isEmpty()) {
+                partidaDao.eliminarUnica();
+                Partida.nuevaPartida(nombreLimpio);
+                cargarVista("/View/Game.fxml");
+            }
+        });
+    }
 
-	}
-	
+    @FXML
+    private void mostrarRanking() {
+        cargarVista("/View/Ranking.fxml");
+    }
+
+    @FXML
+    private void salir() {
+        Stage stage = (Stage) btnContinuar.getScene().getWindow();
+        stage.close();
+    }
+
+    private void cargarVista(String ruta) {
+        try {
+            URL fxml = getClass().getResource(ruta);
+
+            if (fxml == null) {
+                throw new IOException("No se encontró el FXML: " + ruta);
+            }
+
+            FXMLLoader loader = new FXMLLoader(fxml);
+            Parent root = loader.load();
+
+            Stage stage = (Stage) btnContinuar.getScene().getWindow();
+            Scene scene = new Scene(root);
+
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (IOException e) {
+            System.out.println("Error al cargar vista: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
 }

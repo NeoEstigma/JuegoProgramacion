@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Date;
+
 import org.bson.Document;
 
 import com.mongodb.client.MongoCollection;
@@ -22,14 +24,21 @@ public class PartidaDao {
 
     public Partida cargarUnica() {
         Document doc = coleccion.find().first();
+
         if (doc == null) {
             return null;
         }
+
         return documentToPartida(doc);
     }
 
     public void guardar(Partida partida) {
+        if (partida == null || partida.getJugador() == null) {
+            return;
+        }
+
         Document doc = partidaToDocument(partida);
+
         coleccion.replaceOne(
                 Filters.eq("jugador", partida.getJugador()),
                 doc,
@@ -39,9 +48,11 @@ public class PartidaDao {
 
     public Partida cargar(String jugador) {
         Document doc = coleccion.find(Filters.eq("jugador", jugador)).first();
+
         if (doc == null) {
             return null;
         }
+
         return documentToPartida(doc);
     }
 
@@ -51,6 +62,10 @@ public class PartidaDao {
 
     private Document partidaToDocument(Partida p) {
         Mejoras m = p.getMejoras();
+
+        if (m == null) {
+            m = new Mejoras();
+        }
 
         Document mejDoc = new Document()
                 .append("numRaspberry", m.getNumRaspberry())
@@ -63,46 +78,51 @@ public class PartidaDao {
         return new Document()
                 .append("jugador", p.getJugador())
                 .append("dataPoints", p.getDp())
+                .append("dpPorClick", p.getDpPorClick())
                 .append("dpPorSegundo", p.getDpSegundo())
                 .append("nivel", p.getNivel())
+                .append("terminado", p.estaTerminado())
+                .append("progresoMaximo", p.getProgresoMaximo())
                 .append("mejoras", mejDoc)
                 .append("tiempoPartida", p.getTiempoPartida())
-                .append("fechaInicio", p.getFechaInicio());
+                .append("fechaInicio", p.getFechaInicio() != null ? p.getFechaInicio() : new Date());
     }
 
     private Partida documentToPartida(Document doc) {
+
         Document mejDoc = (Document) doc.get("mejoras");
 
         if (mejDoc == null) {
             mejDoc = new Document();
         }
 
-        Mejoras mejoras = new Mejoras(
-                getInt(mejDoc, "numRaspberry", 0),
-                getInt(mejDoc, "numPC", 0),
-                getInt(mejDoc, "numJunior", 0),
-                getInt(mejDoc, "numSenior", 0),
-                getInt(mejDoc, "numMaqCafe", 0),
-                getInt(mejDoc, "numRGBS", 0)
-        );
+        Mejoras mejoras = new Mejoras();
 
-        return new Partida(
-                doc.getString("jugador"),
-                getInt(doc, "dataPoints", 0),
-                getInt(doc, "nivel", 1),
-                getInt(doc, "dpPorSegundo", 0),
-                mejoras,
-                getLong(doc, "tiempoPartida", 0L),
-                doc.getDate("fechaInicio")
-        );
+        mejoras.setNumRaspberry(getInt(mejDoc, "numRaspberry", 0));
+        mejoras.setNumPC(getInt(mejDoc, "numPC", 0));
+        mejoras.setNumJunior(getInt(mejDoc, "numJunior", 0));
+        mejoras.setNumSenior(getInt(mejDoc, "numSenior", 0));
+        mejoras.setNumMaqCafe(getInt(mejDoc, "numMaqCafe", 0));
+        mejoras.setNumRGBS(getInt(mejDoc, "numRGBS", 0));
+
+        Partida partida = new Partida();
+
+        partida.setJugador(doc.getString("jugador"));
+        partida.setDp(getLong(doc, "dataPoints", 0L));
+        partida.setDpPorClick(getLong(doc, "dpPorClick", 1L));
+        partida.setDpSegundo(getLong(doc, "dpPorSegundo", 0L));
+        partida.setNivel(getInt(doc, "nivel", 1));
+        partida.setTerminado(getBoolean(doc, "terminado", false));
+        partida.setProgresoMaximo(getLong(doc, "progresoMaximo", 100000L));
+        partida.setMejoras(mejoras);
+        partida.setTiempoPartida(getLong(doc, "tiempoPartida", 0L));
+        partida.setFechaInicio(doc.getDate("fechaInicio"));
+
+        return partida;
     }
 
     private int getInt(Document doc, String campo, int valorDefecto) {
         Object valor = doc.get(campo);
-
-        if (valor == null) {
-            return valorDefecto;
-        }
 
         if (valor instanceof Number) {
             return ((Number) valor).intValue();
@@ -114,12 +134,18 @@ public class PartidaDao {
     private long getLong(Document doc, String campo, long valorDefecto) {
         Object valor = doc.get(campo);
 
-        if (valor == null) {
-            return valorDefecto;
-        }
-
         if (valor instanceof Number) {
             return ((Number) valor).longValue();
+        }
+
+        return valorDefecto;
+    }
+
+    private boolean getBoolean(Document doc, String campo, boolean valorDefecto) {
+        Object valor = doc.get(campo);
+
+        if (valor instanceof Boolean) {
+            return (Boolean) valor;
         }
 
         return valorDefecto;
