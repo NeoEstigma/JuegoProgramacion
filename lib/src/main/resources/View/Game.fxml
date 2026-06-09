@@ -18,15 +18,15 @@
     <top>
         <VBox spacing="10" styleClass="top-panel">
             <HBox alignment="CENTER_LEFT" spacing="10">
-                <Label styleClass="dot-red" text="●" />
-                <Label styleClass="dot-yellow" text="●" />
-                <Label styleClass="dot-green" text="●" />
 
-                <VBox spacing="0">
-                    <Label fx:id="lblTitulo" styleClass="app-title" text="TERMINAL CLICKER">
+                <VBox prefHeight="69.0" prefWidth="413.0" spacing="0">
+                    <Label fx:id="lblTitulo" prefHeight="41.0" prefWidth="407.0" styleClass="app-title" text="TERMINAL CLICKER">
                   <VBox.margin>
                      <Insets top="10.0" />
-                  </VBox.margin></Label>
+                  </VBox.margin>
+                  <font>
+                     <Font name="System Bold Italic" size="39.0" />
+                  </font></Label>
                     <HBox spacing="4">
                         <Label fx:id="lblEstadoTexto" styleClass="status-text" text="Infiltracion activa - operador:" />
                         <Label fx:id="lblOperador" styleClass="status-text" text="neo" />
@@ -76,14 +76,20 @@
                 <Region HBox.hgrow="ALWAYS" />
 
                 <VBox>
-                    <Label text="NIVEL DE ACCESO">
+                    <Label prefHeight="25.0" prefWidth="180.0" text="NIVEL DE ACCESO">
                   <padding>
                      <Insets right="10.0" />
-                  </padding></Label>
+                  </padding>
+                  <font>
+                     <Font size="16.0" />
+                  </font></Label>
                     <HBox spacing="4">
                         <Label text="Nivel" />
                         <Label fx:id="lblNivel" text="1" />
                     </HBox>
+               <HBox.margin>
+                  <Insets right="40.0" />
+               </HBox.margin>
                 </VBox>
             <VBox.margin>
                <Insets left="10.0" />
