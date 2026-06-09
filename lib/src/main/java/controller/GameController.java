@@ -46,28 +46,23 @@ public class GameController {
 
 	@FXML
 	public void initialize() {
+		Partida partida = Partida.getInstancia();
+		PartidaDao dao = new PartidaDao();
+		partida = dao.cargarUnica();
 
-	    PartidaDao dao = new PartidaDao();
-	    partida = dao.cargarUnica();
+		if (partida == null) {
+			partida = new Partida();
+			terminalArea.appendText("Nueva partida creada...\n");
+		} else {
+			terminalArea.appendText("Partida cargada correctamente...\n");
+		}
 
-	    if (partida == null) {
-	        partida = new Partida();
-	        terminalArea.appendText("Nueva partida creada...\n");
-	    } else {
-	        terminalArea.appendText("Partida cargada correctamente...\n");
-	    }
+		iniciarTimeline();
 
-	    iniciarTimeline();
+		terminalArea.appendText("Sistema iniciado...\n");
+		terminalArea.appendText("> Rango actual: " + partida.getNombreNivel() + "\n");
 
-	    terminalArea.appendText("Sistema iniciado...\n");
-	    terminalArea.appendText("> Rango actual: " + partida.getNombreNivel() + "\n");
-
-	    actualizarVista();
-	}
-
-	public void setJugador(String nombre) {
-		partida.setJugador(nombre);
-		terminalArea.appendText("> Operador: " + nombre + "\n");
+		actualizarVista();
 	}
 
 	public void cargarPartida(Partida partidaGuardada) {
