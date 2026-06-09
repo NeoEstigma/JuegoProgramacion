@@ -7,7 +7,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
 import javafx.util.Duration;
-import model.Partida;
 
 public class GameController {
 
@@ -60,8 +59,6 @@ public class GameController {
 
 	@FXML
 	private void initialize() {
-		Partida partida = new Partida();
-		actualizarVista();
 		terminalArea.appendText("Sistema iniciado...\n");
 		terminalArea.appendText("> Rango actual: " + obtenerNombreNivel() + "\n");
 
