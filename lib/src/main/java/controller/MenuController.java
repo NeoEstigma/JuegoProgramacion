@@ -47,8 +47,6 @@ public class MenuController {
 			if (!nombre.trim().isEmpty()) {
 				// Borra la partida anterior si existe
 				partidaDao.eliminarUnica();
-				// When the player enters their name and starts the game:
-				Partida.nuevaPartida(nombre);
 				// Carga la vista del juego
 				cargarVista("/View/Game.fxml");
 			}
@@ -78,5 +76,5 @@ public class MenuController {
 			System.out.println("Error al cargar vista: " + e.getMessage());
 		}
 	}
-
+	
 }
