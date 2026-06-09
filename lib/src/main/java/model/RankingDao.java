@@ -90,9 +90,7 @@ public class RankingDao {
 
         Ranking ranking = new Ranking();
         ranking.setJugador(doc.getString("jugador"));
-        ranking.setDp(getLongSeguro(doc, "dataPoints", 0L));
-        ranking.setNivel(getIntegerSeguro(doc, "nivel", 1));
-        ranking.setMejoras(mejoras);
+        ranking.setDp(getIntegerSeguro(doc, "dataPoints", 0));        ranking.setMejoras(mejoras);
         ranking.setTiempoPartida(getLongSeguro(doc, "tiempoPartida", 0L));
         ranking.setFechaInicio(doc.getDate("fechaInicio"));
 

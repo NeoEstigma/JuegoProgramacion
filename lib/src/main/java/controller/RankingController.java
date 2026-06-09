@@ -80,7 +80,7 @@ public class RankingController implements Initializable {
         );
 
         colSenior.setCellValueFactory(cell ->
-                new SimpleIntegerProperty(cell.getValue().getMejoras().getNumJunior())
+                new SimpleIntegerProperty(cell.getValue().getMejoras().getNumSenior())
         );
 
         colMaqCafe.setCellValueFactory(cell ->
