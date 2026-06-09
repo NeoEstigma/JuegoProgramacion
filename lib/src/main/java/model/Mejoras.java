@@ -14,7 +14,6 @@ public class Mejoras {
 	private long precioSenior = 1000;
 	private long precioCafe = 2500;
 	private long precioRgbs = 5000;
-	private long progresoMaximo = 100000;
 
 	public Mejoras() {
 	}
@@ -122,14 +121,6 @@ public class Mejoras {
 
 	public void setPrecioRgbs(long l) {
 		this.precioRgbs = l;
-	}
-
-	public long getProgresoMaximo() {
-		return progresoMaximo;
-	}
-
-	public void setProgresoMaximo(int progresoMaximo) {
-		this.progresoMaximo = progresoMaximo;
 	}
 
 }
