@@ -46,7 +46,11 @@ public class MenuController {
 		resultado.ifPresent(nombre -> {
 			if (!nombre.trim().isEmpty()) {
 				partidaDao.eliminarUnica();
+<<<<<<< HEAD
 				Partida.nuevaPartida(nombre.trim());
+=======
+				// Carga la vista del juego
+>>>>>>> e69874501bd07f31b86e830068bfdf7014f7fde5
 				cargarVista("/View/Game.fxml");
 			}
 		});
@@ -77,5 +81,5 @@ public class MenuController {
 		}
 
 	}
-
+	
 }
