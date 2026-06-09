@@ -1,0 +1,173 @@
+.root {
+    -fx-background-color: #050505;
+    -fx-font-family: "Consolas";
+}
+
+/* ===== TITULOS ===== */
+
+.app-title,
+.titulo-ranking {
+    -fx-text-fill: #00ff66;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, #00ff66, 15, 0.8, 0, 0);
+}
+
+.subtitulo-ranking,
+.status-text {
+    -fx-text-fill: #66ff99;
+}
+
+/* ===== PANEL SUPERIOR ===== */
+
+.top-panel {
+    -fx-background-color: #0a0a0a;
+    -fx-border-color: #00ff66;
+    -fx-border-width: 0 0 2 0;
+    -fx-padding: 10;
+}
+
+/* ===== LABELS ===== */
+
+.label {
+    -fx-text-fill: #00ff66;
+}
+
+/* ===== BOTONES ===== */
+
+.button {
+    -fx-background-color: #101010;
+    -fx-border-color: #00ff66;
+    -fx-border-width: 2;
+    -fx-text-fill: #00ff66;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #00ff66;
+    -fx-text-fill: black;
+}
+
+.button:pressed {
+    -fx-background-color: #009933;
+}
+
+/* ===== MENU ===== */
+
+.menu-button {
+    -fx-background-color: #101010;
+    -fx-border-color: #00ff66;
+    -fx-text-fill: #00ff66;
+}
+
+.menu-button:hover {
+    -fx-background-color: #00ff66;
+}
+
+.menu-button:hover .label {
+    -fx-text-fill: black;
+}
+
+.context-menu {
+    -fx-background-color: #050505;
+    -fx-border-color: #00ff66;
+}
+
+.menu-item .label {
+    -fx-text-fill: #00ff66;
+}
+
+.menu-item:focused {
+    -fx-background-color: #00ff66;
+}
+
+.menu-item:focused .label {
+    -fx-text-fill: black;
+}
+
+/* ===== TERMINAL ===== */
+
+.text-area {
+    -fx-control-inner-background: #000000;
+    -fx-background-color: #000000;
+    -fx-text-fill: #00ff66;
+    -fx-border-color: #00ff66;
+    -fx-border-width: 2;
+    -fx-highlight-fill: #00ff66;
+    -fx-highlight-text-fill: black;
+}
+
+.text-area .content {
+    -fx-background-color: #000000;
+}
+
+/* ===== PROGRESS BAR ===== */
+
+.progress-bar {
+    -fx-accent: #00ff66;
+}
+
+.progress-bar .track {
+    -fx-background-color: #101010;
+}
+
+.progress-bar .bar {
+    -fx-background-color: #00ff66;
+}
+
+/* ===== TABLEVIEW RANKING ===== */
+
+.table-view {
+    -fx-background-color: #050505;
+    -fx-border-color: #00ff66;
+    -fx-border-width: 2;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #111111;
+}
+
+.table-view .column-header {
+    -fx-background-color: #111111;
+    -fx-border-color: #00ff66;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: #00ff66;
+    -fx-font-weight: bold;
+}
+
+.table-row-cell {
+    -fx-background-color: #050505;
+    -fx-text-background-color: #00ff66;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #0a0a0a;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #00ff66;
+    -fx-text-background-color: black;
+}
+
+.table-cell {
+    -fx-alignment: CENTER;
+}
+
+/* ===== SCROLL ===== */
+
+.scroll-bar .thumb {
+    -fx-background-color: #00ff66;
+}
+
+.scroll-bar .track {
+    -fx-background-color: #111111;
+}
+
+/* ===== CONTENEDORES ===== */
+
+.vbox,
+.hbox {
+    -fx-background-color: transparent;
+}

@@ -13,7 +13,7 @@
             fx:controller="controller.RankingController"
             prefWidth="1000"
             prefHeight="650"
-            styleClass="root">
+            stylesheets="@style.css">
 
     <VBox spacing="20"
           AnchorPane.topAnchor="25"
