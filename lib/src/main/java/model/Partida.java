@@ -46,11 +46,19 @@ public class Partida {
 		this.progresoMaximo = 100000;
 	}
 
-	public Partida(String jugador) {
-		this();
+	public Partida(String jugador, long dp, long dpPorClick, long dpSegundo, int nivel, boolean terminado,
+			long progresoMaximo, Mejoras mejoras, long tiempoPartida, Date fechaInicio) {
+		super();
 		this.jugador = jugador;
-		this.fechaInicio = new Date();
-		this.mejoras = new Mejoras(0, 0, 0, 0, 0, 0);
+		this.dp = 0;
+		this.dpPorClick = 1;
+		this.dpSegundo = 0;
+		this.nivel = 1;
+		this.terminado = false;
+		this.progresoMaximo = 100000;
+		this.mejoras = new Mejoras();
+		this.tiempoPartida = tiempoPartida;
+		this.fechaInicio = fechaInicio;
 	}
 
 	public Partida(String jugador, int dp, int nivel, int dpPorSegundo, Mejoras mejoras, long tiempoPartida,

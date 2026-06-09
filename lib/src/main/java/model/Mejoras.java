@@ -8,23 +8,26 @@ public class Mejoras {
 	private int numSenior;
 	private int numMaqCafe;
 	private int numRGBS;
-	private long precioRaspberry = 50;
-	private long precioPc = 200;
-	private long precioJunior = 500;
-	private long precioSenior = 1000;
-	private long precioCafe = 2500;
-	private long precioRgbs = 5000;
+	private long precioRaspberry;
+	private long precioPc;
+	private long precioJunior;
+	private long precioSenior;
+	private long precioCafe;
+	private long precioRgbs;
 
 	public Mejoras() {
-	}
-
-	public Mejoras(int numRaspberry, int numPC, int numJunior, int numSenior, int numMaqCafe, int numRGBS) {
-		this.numRaspberry = numRaspberry;
-		this.numPC = numPC;
-		this.numJunior = numJunior;
-		this.numSenior = numSenior;
-		this.numMaqCafe = numMaqCafe;
-		this.numRGBS = numRGBS;
+		this.numRaspberry = 0;
+		this.numPC = 0;
+		this.numJunior = 0;
+		this.numSenior = 0;
+		this.numMaqCafe = 0;
+		this.numRGBS = 0;
+		this.precioRaspberry = 50;
+		this.precioPc = 200;
+		this.precioJunior = 500;
+		this.precioSenior = 1000;
+		this.precioCafe = 2500;
+		this.precioRgbs = 5000;
 	}
 
 	public int getNumRaspberry() {
