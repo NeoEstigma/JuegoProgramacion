@@ -11,12 +11,6 @@ public class Partida {
 	private int nivel;
 	private boolean terminado;
 
-	private long precioRaspberry;
-	private long precioPc;
-	private long precioJunior;
-	private long precioSenior;
-	private long precioCafe;
-	private long precioRgbs;
 	private long progresoMaximo;
 
 	private Mejoras mejoras;
@@ -28,21 +22,35 @@ public class Partida {
 			"Operador Encubierto", "Especialista en Intrusion", "Arquitecto Digital", "Maestro del Backdoor",
 			"Fantasma de la Red", "Overmind", "ROOT ABSOLUTO - FINAL" };
 
+	private static Partida instancia;
+
+	public static Partida getInstancia() {
+		return instancia;
+	}
+
+	public static Partida nuevaPartida(String jugador) {
+		instancia = new Partida(jugador);
+		return instancia;
+	}
+
+	public static void setInstancia(Partida p) {
+		instancia = p;
+	}
+
 	public Partida() {
 		this.dp = 0;
 		this.dpPorClick = 1;
 		this.dpSegundo = 0;
 		this.nivel = 1;
 		this.terminado = false;
-		this.precioRaspberry = 50;
-		this.precioPc = 200;
-		this.precioJunior = 500;
-		this.precioSenior = 1000;
-		this.precioCafe = 2500;
-		this.precioRgbs = 5000;
 		this.progresoMaximo = 100000;
-		this.mejoras = new Mejoras(0, 0, 0, 0, 0, 0);
+	}
+
+	public Partida(String jugador) {
+		this();
+		this.jugador = jugador;
 		this.fechaInicio = new Date();
+		this.mejoras = new Mejoras(0, 0, 0, 0, 0, 0);
 	}
 
 	public Partida(String jugador, int dp, int nivel, int dpPorSegundo, Mejoras mejoras, long tiempoPartida,
@@ -71,11 +79,11 @@ public class Partida {
 		if (terminado) {
 			return null;
 		}
-		if (dp >= precioRaspberry) {
-			dp -= precioRaspberry;
+		if (dp >= mejoras.getPrecioRaspberry()) {
+			dp -= mejoras.getPrecioRaspberry();
 			dpPorClick += 1;
 			mejoras.setNumRaspberry(mejoras.getNumRaspberry() + 1);
-			precioRaspberry = aumentarPrecio(precioRaspberry, 1.05);
+			mejoras.setPrecioRaspberry(aumentarPrecio(mejoras.getPrecioRaspberry(), 1.05));
 			return "> Raspberry comprada. +1 DP por clic";
 		}
 		return "> DP insuficientes para Raspberry";
@@ -85,11 +93,11 @@ public class Partida {
 		if (terminado) {
 			return null;
 		}
-		if (dp >= precioPc) {
-			dp -= precioPc;
+		if (dp >= mejoras.getPrecioPc()) {
+			dp -= mejoras.getPrecioPc();
 			dpPorClick += 5;
 			mejoras.setNumPC(mejoras.getNumPC() + 1);
-			precioPc = aumentarPrecio(precioPc, 1.12);
+			mejoras.setPrecioPc(aumentarPrecio(mejoras.getPrecioPc(), 1.12));
 			return "> PC comprado. +5 DP por clic";
 		}
 		return "> DP insuficientes para PC";
@@ -99,11 +107,11 @@ public class Partida {
 		if (terminado) {
 			return null;
 		}
-		if (dp >= precioJunior) {
-			dp -= precioJunior;
+		if (dp >= mejoras.getPrecioJunior()) {
+			dp -= mejoras.getPrecioJunior();
 			dpSegundo += 10;
 			mejoras.setNumJunior(mejoras.getNumJunior() + 1);
-			precioJunior = aumentarPrecio(precioJunior, 1.08);
+			mejoras.setPrecioJunior(aumentarPrecio(mejoras.getPrecioJunior(), 1.08));
 			return "> Junior comprado. +10 DP/s";
 		}
 		return "> DP insuficientes para Junior";
@@ -113,11 +121,11 @@ public class Partida {
 		if (terminado) {
 			return null;
 		}
-		if (dp >= precioSenior) {
-			dp -= precioSenior;
+		if (dp >= mejoras.getPrecioSenior()) {
+			dp -= mejoras.getPrecioSenior();
 			dpSegundo += 50;
 			mejoras.setNumSenior(mejoras.getNumSenior() + 1);
-			precioSenior = aumentarPrecio(precioSenior, 1.10);
+			mejoras.setPrecioSenior(aumentarPrecio(mejoras.getPrecioSenior(), 1.10));
 			return "> Senior comprado. +50 DP/s";
 		}
 		return "> DP insuficientes para Senior";
@@ -127,12 +135,12 @@ public class Partida {
 		if (terminado) {
 			return null;
 		}
-		if (dp >= precioCafe) {
-			dp -= precioCafe;
+		if (dp >= mejoras.getPrecioCafe()) {
+			dp -= mejoras.getPrecioCafe();
 			long aumento = Math.max(1, Math.round(dpSegundo * 0.03));
 			dpSegundo += aumento;
 			mejoras.setNumMaqCafe(mejoras.getNumMaqCafe() + 1);
-			precioCafe = aumentarPrecio(precioCafe, 1.35);
+			mejoras.setPrecioCafe(aumentarPrecio(mejoras.getPrecioCafe(), 1.35));
 			return "> Coffee comprado. +3% produccion. +" + aumento + " DP/s";
 		}
 		return "> DP insuficientes para Coffee";
@@ -142,12 +150,12 @@ public class Partida {
 		if (terminado) {
 			return null;
 		}
-		if (dp >= precioRgbs) {
-			dp -= precioRgbs;
+		if (dp >= mejoras.getPrecioRgbs()) {
+			dp -= mejoras.getPrecioRgbs();
 			long aumento = Math.max(1, Math.round(dpSegundo * 0.10));
 			dpSegundo += aumento;
 			mejoras.setNumRGBS(mejoras.getNumRGBS() + 1);
-			precioRgbs = aumentarPrecio(precioRgbs, 1.50);
+			mejoras.setPrecioRgbs(aumentarPrecio(mejoras.getPrecioRgbs(), 1.50));
 			return "> RGBS comprado. +10% produccion. +" + aumento + " DP/s";
 		}
 		return "> DP insuficientes para RGBS";
@@ -175,8 +183,6 @@ public class Partida {
 			dp += dpSegundo;
 		}
 	}
-
-	// ── Helpers ──
 
 	private long aumentarPrecio(long precio, double mult) {
 		long nuevo = Math.round(precio * mult);
@@ -229,30 +235,6 @@ public class Partida {
 		this.nivel = nivel;
 	}
 
-	public long getPrecioRaspberry() {
-		return precioRaspberry;
-	}
-
-	public long getPrecioPc() {
-		return precioPc;
-	}
-
-	public long getPrecioJunior() {
-		return precioJunior;
-	}
-
-	public long getPrecioSenior() {
-		return precioSenior;
-	}
-
-	public long getPrecioCafe() {
-		return precioCafe;
-	}
-
-	public long getPrecioRgbs() {
-		return precioRgbs;
-	}
-
 	public long getProgresoMaximo() {
 		return progresoMaximo;
 	}
@@ -279,5 +261,29 @@ public class Partida {
 
 	public void setFechaInicio(Date f) {
 		this.fechaInicio = f;
+	}
+
+	public long getPrecioRaspberry() {
+		return mejoras.getPrecioRaspberry();
+	}
+
+	public long getPrecioPc() {
+		return mejoras.getPrecioPc();
+	}
+
+	public long getPrecioJunior() {
+		return mejoras.getPrecioJunior();
+	}
+
+	public long getPrecioSenior() {
+		return mejoras.getPrecioSenior();
+	}
+
+	public long getPrecioCafe() {
+		return mejoras.getPrecioCafe();
+	}
+
+	public long getPrecioRgbs() {
+		return mejoras.getPrecioRgbs();
 	}
 }

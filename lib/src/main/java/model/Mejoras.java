@@ -8,6 +8,13 @@ public class Mejoras {
 	private int numSenior;
 	private int numMaqCafe;
 	private int numRGBS;
+	private long precioRaspberry = 50;
+	private long precioPc = 200;
+	private long precioJunior = 500;
+	private long precioSenior = 1000;
+	private long precioCafe = 2500;
+	private long precioRgbs = 5000;
+	private long progresoMaximo = 100000;
 
 	public Mejoras() {
 	}
@@ -67,6 +74,62 @@ public class Mejoras {
 
 	public void setNumRGBS(int numRGBS) {
 		this.numRGBS = numRGBS;
+	}
+
+	public long getPrecioRaspberry() {
+		return precioRaspberry;
+	}
+
+	public void setPrecioRaspberry(long precioRaspberry) {
+		this.precioRaspberry = precioRaspberry;
+	}
+
+	public long getPrecioPc() {
+		return precioPc;
+	}
+
+	public void setPrecioPc(long precioPc) {
+		this.precioPc = precioPc;
+	}
+
+	public long getPrecioJunior() {
+		return precioJunior;
+	}
+
+	public void setPrecioJunior(long precioJunior) {
+		this.precioJunior = precioJunior;
+	}
+
+	public long getPrecioSenior() {
+		return precioSenior;
+	}
+
+	public void setPrecioSenior(long precioSenior) {
+		this.precioSenior = precioSenior;
+	}
+
+	public long getPrecioCafe() {
+		return precioCafe;
+	}
+
+	public void setPrecioCafe(long l) {
+		this.precioCafe = l;
+	}
+
+	public long getPrecioRgbs() {
+		return precioRgbs;
+	}
+
+	public void setPrecioRgbs(long l) {
+		this.precioRgbs = l;
+	}
+
+	public long getProgresoMaximo() {
+		return progresoMaximo;
+	}
+
+	public void setProgresoMaximo(int progresoMaximo) {
+		this.progresoMaximo = progresoMaximo;
 	}
 
 }
