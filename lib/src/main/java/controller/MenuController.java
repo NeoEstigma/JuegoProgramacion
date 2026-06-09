@@ -76,4 +76,5 @@ public class MenuController {
 			System.out.println("Error al cargar vista: " + e.getMessage());
 		}
 	}
+	
 }

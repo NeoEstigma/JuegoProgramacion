@@ -14,7 +14,7 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 
 		try {
-			URL fxml = getClass().getResource("/View/Game.fxml");
+			URL fxml = getClass().getResource("/View/Menu.fxml");
 			System.out.println("FXML = " + fxml);
 
 			URL css = getClass().getResource("/View/style.css");
