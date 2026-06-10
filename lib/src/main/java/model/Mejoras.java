@@ -30,6 +30,10 @@ public class Mejoras {
 		this.precioRgbs = 5000;
 	}
 
+	public long calcularPrecio(long precioBase, double multiplicador, int cantidad) {
+		return Math.round(precioBase * Math.pow(multiplicador, cantidad));
+	}
+
 	public int getNumRaspberry() {
 		return numRaspberry;
 	}

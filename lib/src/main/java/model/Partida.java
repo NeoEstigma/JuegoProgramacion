@@ -74,13 +74,12 @@ public class Partida {
 	// ── Aumenta todos los precios al cargar partida ──
 	public void comprarTodos() {
 
-		mejoras.setPrecioRaspberry(aumentarPrecio(mejoras.getPrecioRaspberry(), 1.05));
-		mejoras.setPrecioPc(aumentarPrecio(mejoras.getPrecioPc(), 1.12));
-		mejoras.setPrecioJunior(aumentarPrecio(mejoras.getPrecioJunior(), 1.08));
-		mejoras.setPrecioSenior(aumentarPrecio(mejoras.getPrecioSenior(), 1.10));
-		mejoras.setPrecioCafe(aumentarPrecio(mejoras.getPrecioCafe(), 1.35));
-		mejoras.setPrecioRgbs(aumentarPrecio(mejoras.getPrecioRgbs(), 1.50));
-
+		mejoras.setPrecioRaspberry(mejoras.calcularPrecio(50, 1.05, mejoras.getNumRaspberry()));
+		mejoras.setPrecioPc(mejoras.calcularPrecio(200, 1.12, mejoras.getNumPC()));
+		mejoras.setPrecioJunior(mejoras.calcularPrecio(500, 1.08, mejoras.getNumJunior()));
+		mejoras.setPrecioSenior(mejoras.calcularPrecio(1000, 1.10, mejoras.getNumSenior()));
+		mejoras.setPrecioCafe(mejoras.calcularPrecio(2500, 1.35, mejoras.getNumMaqCafe()));
+		mejoras.setPrecioRgbs(mejoras.calcularPrecio(5000, 1.50, mejoras.getNumRGBS()));
 	}
 
 	// ── Acciones del juego ──
