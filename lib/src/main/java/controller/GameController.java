@@ -16,6 +16,8 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.Partida;
 import model.PartidaDao;
+import model.Ranking;
+import model.RankingDao;
 
 public class GameController {
 
@@ -42,13 +44,12 @@ public class GameController {
 
 	private Partida partida;
 	private PartidaDao partidaDao = new PartidaDao();
+	private RankingDao rankingDao = new RankingDao();
 	private Timeline produccionPasiva;
 
 	@FXML
 	public void initialize() {
 		partida = Partida.getInstancia();
-		System.out.println("GameController instancia: " + partida);
-		System.out.println("Jugador: " + (partida != null ? partida.getJugador() : "NULL"));
 
 		if (partida == null) {
 			terminalArea.appendText("Error: no hay partida iniciada\n");
@@ -62,6 +63,7 @@ public class GameController {
 		actualizarVista();
 	}
 
+<<<<<<< HEAD
 	public void cargarPartida(Partida partidaGuardada) {
 		this.partida = partidaGuardada;
 		partida.comprarTodos();
@@ -69,6 +71,8 @@ public class GameController {
 		actualizarVista();
 	}
 
+=======
+>>>>>>> db3f930eae501ffe6a53b7d122b9dac497aa5978
 	private void iniciarTimeline() {
 		produccionPasiva = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
 			if (partida != null && !partida.estaTerminado()) {
@@ -136,6 +140,12 @@ public class GameController {
 		actualizarVista();
 	}
 
+	private void guardarEnRanking() {
+		Ranking resultado = new Ranking(partida.getJugador(), partida.getDp(), partida.getNivel(), partida.getMejoras(),
+				partida.getTiempoPartida(), partida.getFechaInicio());
+		rankingDao.guardarOActualizar(resultado);
+	}
+
 	private void terminarJuego() {
 		produccionPasiva.stop();
 		nodoBarra.setProgress(1);
@@ -145,8 +155,8 @@ public class GameController {
 		terminalArea.appendText("FIN DEL JUEGO\n");
 		terminalArea.appendText("==============================\n");
 		bloquearMejoras();
-		// Guardar en ranking automáticamente
-		// rankingDao.insertar(...) ← lo añadimos cuando conectemos RankingDao
+		guardarEnRanking();
+		terminalArea.appendText("> resultado guardado en ranking\n");
 	}
 
 	private void bloquearMejoras() {
@@ -161,12 +171,14 @@ public class GameController {
 	@FXML
 	private void guardar() {
 		partidaDao.guardar(partida);
+		guardarEnRanking();
 		terminalArea.appendText("> partida guardada\n");
 	}
 
 	@FXML
 	private void guardarSalir() {
 		partidaDao.guardar(partida);
+		guardarEnRanking();
 		terminalArea.appendText("> partida guardada. Saliendo...\n");
 		volverAlMenu();
 	}
