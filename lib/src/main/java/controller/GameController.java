@@ -63,7 +63,6 @@ public class GameController {
 		actualizarVista();
 	}
 
-<<<<<<< HEAD
 	public void cargarPartida(Partida partidaGuardada) {
 		this.partida = partidaGuardada;
 		partida.comprarTodos();
@@ -71,8 +70,6 @@ public class GameController {
 		actualizarVista();
 	}
 
-=======
->>>>>>> db3f930eae501ffe6a53b7d122b9dac497aa5978
 	private void iniciarTimeline() {
 		produccionPasiva = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
 			if (partida != null && !partida.estaTerminado()) {

@@ -238,6 +238,7 @@ public class Partida {
 	public void tickSegundo() {
 		if (!terminado) {
 			dp += dpSegundo;
+			tiempoPartida++;
 		}
 	}
 
