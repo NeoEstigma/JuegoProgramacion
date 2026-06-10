@@ -16,6 +16,8 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.Partida;
 import model.PartidaDao;
+import model.Ranking;
+import model.RankingDao;
 
 public class GameController {
 
@@ -42,6 +44,7 @@ public class GameController {
 
 	private Partida partida;
 	private PartidaDao partidaDao = new PartidaDao();
+	private RankingDao rankingDao = new RankingDao();
 	private Timeline produccionPasiva;
 
 	@FXML
@@ -135,6 +138,12 @@ public class GameController {
 		actualizarVista();
 	}
 
+	private void guardarEnRanking() {
+		Ranking resultado = new Ranking(partida.getJugador(), partida.getDp(), partida.getNivel(), partida.getMejoras(),
+				partida.getTiempoPartida(), partida.getFechaInicio());
+		rankingDao.guardarOActualizar(resultado);
+	}
+
 	private void terminarJuego() {
 		produccionPasiva.stop();
 		nodoBarra.setProgress(1);
@@ -144,8 +153,8 @@ public class GameController {
 		terminalArea.appendText("FIN DEL JUEGO\n");
 		terminalArea.appendText("==============================\n");
 		bloquearMejoras();
-		// Guardar en ranking automáticamente
-		// rankingDao.insertar(...) ← lo añadimos cuando conectemos RankingDao
+		guardarEnRanking();
+		terminalArea.appendText("> resultado guardado en ranking\n");
 	}
 
 	private void bloquearMejoras() {
@@ -160,12 +169,14 @@ public class GameController {
 	@FXML
 	private void guardar() {
 		partidaDao.guardar(partida);
+		guardarEnRanking();
 		terminalArea.appendText("> partida guardada\n");
 	}
 
 	@FXML
 	private void guardarSalir() {
 		partidaDao.guardar(partida);
+		guardarEnRanking();
 		terminalArea.appendText("> partida guardada. Saliendo...\n");
 		volverAlMenu();
 	}
