@@ -64,6 +64,7 @@ public class GameController {
 
 	public void cargarPartida(Partida partidaGuardada) {
 		this.partida = partidaGuardada;
+		partida.comprarTodos();
 		terminalArea.appendText("> Partida cargada. Bienvenido, " + partida.getJugador() + "\n");
 		actualizarVista();
 	}

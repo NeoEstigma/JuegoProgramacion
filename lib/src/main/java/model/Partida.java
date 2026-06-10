@@ -4,349 +4,372 @@ import java.util.Date;
 
 public class Partida {
 
-    private String jugador;
-    private long dp;
-    private long dpPorClick;
-    private long dpSegundo;
-    private int nivel;
-    private boolean terminado;
-
-    private long progresoMaximo;
-
-    private Mejoras mejoras;
-    private long tiempoPartida;
-    private Date fechaInicio;
-
-    private static final int NIVEL_MAXIMO = 10;
-
-    private static final String[] NOMBRES_NIVELES = {
-            "Script Kiddie",
-            "Escaner de Red",
-            "Analista de Sistemas",
-            "Operador Encubierto",
-            "Especialista en Intrusion",
-            "Arquitecto Digital",
-            "Maestro del Backdoor",
-            "Fantasma de la Red",
-            "Overmind",
-            "ROOT ABSOLUTO - FINAL"
-    };
-
-    private static Partida instancia;
-
-    public static Partida getInstancia() {
-        return instancia;
-    }
-
-    public static Partida nuevaPartida(String jugador) {
-        instancia = new Partida(jugador);
-        return instancia;
-    }
-
-    public static void setInstancia(Partida p) {
-        instancia = p;
-    }
-
-    public Partida() {
-        this.jugador = "";
-        this.dp = 0;
-        this.dpPorClick = 1;
-        this.dpSegundo = 0;
-        this.nivel = 1;
-        this.terminado = false;
-        this.progresoMaximo = 100000;
-        this.mejoras = new Mejoras();
-        this.tiempoPartida = 0;
-        this.fechaInicio = new Date();
-    }
-
-    public Partida(String jugador) {
-        this();
-        this.jugador = jugador;
-    }
-    public Partida(String jugador, long dp, long dpPorClick, long dpSegundo, int nivel,
-            boolean terminado, long progresoMaximo, Mejoras mejoras,
-            long tiempoPartida, Date fechaInicio) {
-
- this.jugador = jugador;
- this.dp = dp;
- this.dpPorClick = dpPorClick;
- this.dpSegundo = dpSegundo;
- this.nivel = nivel;
- this.terminado = terminado;
- this.progresoMaximo = progresoMaximo;
- this.mejoras = mejoras != null ? mejoras : new Mejoras();
- this.tiempoPartida = tiempoPartida;
- this.fechaInicio = fechaInicio != null ? fechaInicio : new Date();
-}
-
-    // ── Acciones del juego ──
-
-    public String click() {
-        if (terminado) return null;
+	private String jugador;
+	private long dp;
+	private long dpPorClick;
+	private long dpSegundo;
+	private int nivel;
+	private boolean terminado;
+
+	private long progresoMaximo;
+
+	private Mejoras mejoras;
+	private long tiempoPartida;
+	private Date fechaInicio;
+
+	private static final int NIVEL_MAXIMO = 10;
+
+	private static final String[] NOMBRES_NIVELES = { "Script Kiddie", "Escaner de Red", "Analista de Sistemas",
+			"Operador Encubierto", "Especialista en Intrusion", "Arquitecto Digital", "Maestro del Backdoor",
+			"Fantasma de la Red", "Overmind", "ROOT ABSOLUTO - FINAL" };
+
+	private static Partida instancia;
+
+	public static Partida getInstancia() {
+		return instancia;
+	}
+
+	public static Partida nuevaPartida(String jugador) {
+		instancia = new Partida(jugador);
+		return instancia;
+	}
+
+	public static void setInstancia(Partida p) {
+		instancia = p;
+	}
+
+	public Partida() {
+		this.jugador = "";
+		this.dp = 0;
+		this.dpPorClick = 1;
+		this.dpSegundo = 0;
+		this.nivel = 1;
+		this.terminado = false;
+		this.progresoMaximo = 100000;
+		this.mejoras = new Mejoras();
+		this.tiempoPartida = 0;
+		this.fechaInicio = new Date();
+	}
+
+	public Partida(String jugador) {
+		this();
+		this.jugador = jugador;
+	}
+
+	public Partida(String jugador, long dp, long dpPorClick, long dpSegundo, int nivel, boolean terminado,
+			long progresoMaximo, Mejoras mejoras, long tiempoPartida, Date fechaInicio) {
+
+		this.jugador = jugador;
+		this.dp = dp;
+		this.dpPorClick = dpPorClick;
+		this.dpSegundo = dpSegundo;
+		this.nivel = nivel;
+		this.terminado = terminado;
+		this.progresoMaximo = progresoMaximo;
+		this.mejoras = mejoras != null ? mejoras : new Mejoras();
+		this.tiempoPartida = tiempoPartida;
+		this.fechaInicio = fechaInicio != null ? fechaInicio : new Date();
+	}
+
+	// ── Aumenta todos los precios al cargar partida ──
+	public void comprarTodos() {
+
+		mejoras.setPrecioRaspberry(aumentarPrecio(mejoras.getPrecioRaspberry(), 1.05));
+		mejoras.setPrecioPc(aumentarPrecio(mejoras.getPrecioPc(), 1.12));
+		mejoras.setPrecioJunior(aumentarPrecio(mejoras.getPrecioJunior(), 1.08));
+		mejoras.setPrecioSenior(aumentarPrecio(mejoras.getPrecioSenior(), 1.10));
+		mejoras.setPrecioCafe(aumentarPrecio(mejoras.getPrecioCafe(), 1.35));
+		mejoras.setPrecioRgbs(aumentarPrecio(mejoras.getPrecioRgbs(), 1.50));
+
+	}
+
+	// ── Acciones del juego ──
+
+	public String click() {
+		if (terminado) {
+			return null;
+		}
+
+		dp += dpPorClick;
+		return "> comando ejecutado +" + dpPorClick + " DP";
+	}
+
+	public String comprarRaspberry() {
+		if (terminado) {
+			return null;
+		}
+
+		if (dp >= mejoras.getPrecioRaspberry()) {
+			dp -= mejoras.getPrecioRaspberry();
+			dpPorClick += 1;
+
+			mejoras.setNumRaspberry(mejoras.getNumRaspberry() + 1);
+			mejoras.setPrecioRaspberry(aumentarPrecio(mejoras.getPrecioRaspberry(), 1.05));
 
-        dp += dpPorClick;
-        return "> comando ejecutado +" + dpPorClick + " DP";
-    }
+			return "> Raspberry comprada. +1 DP por clic";
+		}
 
-    public String comprarRaspberry() {
-        if (terminado) return null;
+		return "> DP insuficientes para Raspberry";
+	}
 
-        if (dp >= mejoras.getPrecioRaspberry()) {
-            dp -= mejoras.getPrecioRaspberry();
-            dpPorClick += 1;
+	public String comprarPc() {
+		if (terminado) {
+			return null;
+		}
 
-            mejoras.setNumRaspberry(mejoras.getNumRaspberry() + 1);
-            mejoras.setPrecioRaspberry(aumentarPrecio(mejoras.getPrecioRaspberry(), 1.05));
+		if (dp >= mejoras.getPrecioPc()) {
+			dp -= mejoras.getPrecioPc();
+			dpPorClick += 5;
 
-            return "> Raspberry comprada. +1 DP por clic";
-        }
+			mejoras.setNumPC(mejoras.getNumPC() + 1);
+			mejoras.setPrecioPc(aumentarPrecio(mejoras.getPrecioPc(), 1.12));
 
-        return "> DP insuficientes para Raspberry";
-    }
+			return "> PC comprado. +5 DP por clic";
+		}
 
-    public String comprarPc() {
-        if (terminado) return null;
+		return "> DP insuficientes para PC";
+	}
 
-        if (dp >= mejoras.getPrecioPc()) {
-            dp -= mejoras.getPrecioPc();
-            dpPorClick += 5;
+	public String comprarJunior() {
+		if (terminado) {
+			return null;
+		}
 
-            mejoras.setNumPC(mejoras.getNumPC() + 1);
-            mejoras.setPrecioPc(aumentarPrecio(mejoras.getPrecioPc(), 1.12));
+		if (dp >= mejoras.getPrecioJunior()) {
+			dp -= mejoras.getPrecioJunior();
+			dpSegundo += 10;
 
-            return "> PC comprado. +5 DP por clic";
-        }
+			mejoras.setNumJunior(mejoras.getNumJunior() + 1);
+			mejoras.setPrecioJunior(aumentarPrecio(mejoras.getPrecioJunior(), 1.08));
 
-        return "> DP insuficientes para PC";
-    }
+			return "> Junior comprado. +10 DP/s";
+		}
 
-    public String comprarJunior() {
-        if (terminado) return null;
+		return "> DP insuficientes para Junior";
+	}
 
-        if (dp >= mejoras.getPrecioJunior()) {
-            dp -= mejoras.getPrecioJunior();
-            dpSegundo += 10;
+	public String comprarSenior() {
+		if (terminado) {
+			return null;
+		}
 
-            mejoras.setNumJunior(mejoras.getNumJunior() + 1);
-            mejoras.setPrecioJunior(aumentarPrecio(mejoras.getPrecioJunior(), 1.08));
+		if (dp >= mejoras.getPrecioSenior()) {
+			dp -= mejoras.getPrecioSenior();
+			dpSegundo += 50;
 
-            return "> Junior comprado. +10 DP/s";
-        }
+			mejoras.setNumSenior(mejoras.getNumSenior() + 1);
+			mejoras.setPrecioSenior(aumentarPrecio(mejoras.getPrecioSenior(), 1.10));
 
-        return "> DP insuficientes para Junior";
-    }
+			return "> Senior comprado. +50 DP/s";
+		}
 
-    public String comprarSenior() {
-        if (terminado) return null;
+		return "> DP insuficientes para Senior";
+	}
 
-        if (dp >= mejoras.getPrecioSenior()) {
-            dp -= mejoras.getPrecioSenior();
-            dpSegundo += 50;
+	public String comprarCafe() {
+		if (terminado) {
+			return null;
+		}
 
-            mejoras.setNumSenior(mejoras.getNumSenior() + 1);
-            mejoras.setPrecioSenior(aumentarPrecio(mejoras.getPrecioSenior(), 1.10));
+		if (dp >= mejoras.getPrecioCafe()) {
+			dp -= mejoras.getPrecioCafe();
 
-            return "> Senior comprado. +50 DP/s";
-        }
+			long aumento = Math.max(1, Math.round(dpSegundo * 0.03));
+			dpSegundo += aumento;
 
-        return "> DP insuficientes para Senior";
-    }
+			mejoras.setNumMaqCafe(mejoras.getNumMaqCafe() + 1);
+			mejoras.setPrecioCafe(aumentarPrecio(mejoras.getPrecioCafe(), 1.35));
 
-    public String comprarCafe() {
-        if (terminado) return null;
+			return "> Coffee comprado. +3% produccion. +" + aumento + " DP/s";
+		}
 
-        if (dp >= mejoras.getPrecioCafe()) {
-            dp -= mejoras.getPrecioCafe();
+		return "> DP insuficientes para Coffee";
+	}
 
-            long aumento = Math.max(1, Math.round(dpSegundo * 0.03));
-            dpSegundo += aumento;
+	public String comprarRgbs() {
+		if (terminado) {
+			return null;
+		}
 
-            mejoras.setNumMaqCafe(mejoras.getNumMaqCafe() + 1);
-            mejoras.setPrecioCafe(aumentarPrecio(mejoras.getPrecioCafe(), 1.35));
+		if (dp >= mejoras.getPrecioRgbs()) {
+			dp -= mejoras.getPrecioRgbs();
 
-            return "> Coffee comprado. +3% produccion. +" + aumento + " DP/s";
-        }
+			long aumento = Math.max(1, Math.round(dpSegundo * 0.10));
+			dpSegundo += aumento;
 
-        return "> DP insuficientes para Coffee";
-    }
+			mejoras.setNumRGBS(mejoras.getNumRGBS() + 1);
+			mejoras.setPrecioRgbs(aumentarPrecio(mejoras.getPrecioRgbs(), 1.50));
 
-    public String comprarRgbs() {
-        if (terminado) return null;
+			return "> RGBS comprado. +10% produccion. +" + aumento + " DP/s";
+		}
 
-        if (dp >= mejoras.getPrecioRgbs()) {
-            dp -= mejoras.getPrecioRgbs();
+		return "> DP insuficientes para RGBS";
+	}
 
-            long aumento = Math.max(1, Math.round(dpSegundo * 0.10));
-            dpSegundo += aumento;
+	public String avanzarProgreso() {
+		if (terminado) {
+			return null;
+		}
 
-            mejoras.setNumRGBS(mejoras.getNumRGBS() + 1);
-            mejoras.setPrecioRgbs(aumentarPrecio(mejoras.getPrecioRgbs(), 1.50));
+		if (dp >= progresoMaximo) {
+			dp -= progresoMaximo;
 
-            return "> RGBS comprado. +10% produccion. +" + aumento + " DP/s";
-        }
+			if (nivel >= NIVEL_MAXIMO) {
+				terminado = true;
+				nivel = NIVEL_MAXIMO;
+				return "FIN";
+			}
 
-        return "> DP insuficientes para RGBS";
-    }
+			nivel++;
 
-    public String avanzarProgreso() {
-        if (terminado) return null;
+			if (nivel == NIVEL_MAXIMO) {
+				terminado = true;
+				return "FIN";
+			}
 
-        if (dp >= progresoMaximo) {
-            dp -= progresoMaximo;
+			progresoMaximo = aumentarPrecio(progresoMaximo, 2.2);
 
-            if (nivel >= NIVEL_MAXIMO) {
-                terminado = true;
-                nivel = NIVEL_MAXIMO;
-                return "FIN";
-            }
+			return "> Nuevo rango desbloqueado: " + getNombreNivel();
+		}
 
-            nivel++;
+		return "> Necesitas " + progresoMaximo + " DP para avanzar";
+	}
 
-            if (nivel == NIVEL_MAXIMO) {
-                terminado = true;
-                return "FIN";
-            }
+	public void tickSegundo() {
+		if (!terminado) {
+			dp += dpSegundo;
+		}
+	}
 
-            progresoMaximo = aumentarPrecio(progresoMaximo, 2.2);
+	private long aumentarPrecio(long precio, double mult) {
+		long nuevo = Math.round(precio * mult);
+		return nuevo <= precio ? precio + 1 : nuevo;
+	}
 
-            return "> Nuevo rango desbloqueado: " + getNombreNivel();
-        }
+	public String getNombreNivel() {
+		if (nivel < 1) {
+			nivel = 1;
+		}
+		if (nivel > NIVEL_MAXIMO) {
+			nivel = NIVEL_MAXIMO;
+		}
 
-        return "> Necesitas " + progresoMaximo + " DP para avanzar";
-    }
+		return NOMBRES_NIVELES[nivel - 1];
+	}
 
-    public void tickSegundo() {
-        if (!terminado) {
-            dp += dpSegundo;
-        }
-    }
+	public boolean estaTerminado() {
+		return terminado;
+	}
 
-    private long aumentarPrecio(long precio, double mult) {
-        long nuevo = Math.round(precio * mult);
-        return nuevo <= precio ? precio + 1 : nuevo;
-    }
+	// ── Getters y setters ──
 
-    public String getNombreNivel() {
-        if (nivel < 1) nivel = 1;
-        if (nivel > NIVEL_MAXIMO) nivel = NIVEL_MAXIMO;
+	public String getJugador() {
+		return jugador;
+	}
 
-        return NOMBRES_NIVELES[nivel - 1];
-    }
+	public void setJugador(String jugador) {
+		this.jugador = jugador;
+	}
 
-    public boolean estaTerminado() {
-        return terminado;
-    }
+	public long getDp() {
+		return dp;
+	}
 
-    // ── Getters y setters ──
+	public void setDp(long dp) {
+		this.dp = dp;
+	}
 
-    public String getJugador() {
-        return jugador;
-    }
+	public long getDpPorClick() {
+		return dpPorClick;
+	}
 
-    public void setJugador(String jugador) {
-        this.jugador = jugador;
-    }
+	public void setDpPorClick(long dpPorClick) {
+		this.dpPorClick = dpPorClick;
+	}
 
-    public long getDp() {
-        return dp;
-    }
+	public long getDpSegundo() {
+		return dpSegundo;
+	}
 
-    public void setDp(long dp) {
-        this.dp = dp;
-    }
+	public void setDpSegundo(long dpSegundo) {
+		this.dpSegundo = dpSegundo;
+	}
 
-    public long getDpPorClick() {
-        return dpPorClick;
-    }
+	public int getNivel() {
+		return nivel;
+	}
 
-    public void setDpPorClick(long dpPorClick) {
-        this.dpPorClick = dpPorClick;
-    }
+	public void setNivel(int nivel) {
+		if (nivel < 1) {
+			this.nivel = 1;
+		} else if (nivel > NIVEL_MAXIMO) {
+			this.nivel = NIVEL_MAXIMO;
+		} else {
+			this.nivel = nivel;
+		}
+	}
 
-    public long getDpSegundo() {
-        return dpSegundo;
-    }
+	public boolean isTerminado() {
+		return terminado;
+	}
 
-    public void setDpSegundo(long dpSegundo) {
-        this.dpSegundo = dpSegundo;
-    }
+	public void setTerminado(boolean terminado) {
+		this.terminado = terminado;
+	}
 
-    public int getNivel() {
-        return nivel;
-    }
+	public long getProgresoMaximo() {
+		return progresoMaximo;
+	}
 
-    public void setNivel(int nivel) {
-        if (nivel < 1) {
-            this.nivel = 1;
-        } else if (nivel > NIVEL_MAXIMO) {
-            this.nivel = NIVEL_MAXIMO;
-        } else {
-            this.nivel = nivel;
-        }
-    }
+	public void setProgresoMaximo(long progresoMaximo) {
+		this.progresoMaximo = progresoMaximo;
+	}
 
-    public boolean isTerminado() {
-        return terminado;
-    }
+	public Mejoras getMejoras() {
+		return mejoras;
+	}
 
-    public void setTerminado(boolean terminado) {
-        this.terminado = terminado;
-    }
+	public void setMejoras(Mejoras mejoras) {
+		this.mejoras = mejoras != null ? mejoras : new Mejoras();
+	}
 
-    public long getProgresoMaximo() {
-        return progresoMaximo;
-    }
+	public long getTiempoPartida() {
+		return tiempoPartida;
+	}
 
-    public void setProgresoMaximo(long progresoMaximo) {
-        this.progresoMaximo = progresoMaximo;
-    }
+	public void setTiempoPartida(long tiempoPartida) {
+		this.tiempoPartida = tiempoPartida;
+	}
 
-    public Mejoras getMejoras() {
-        return mejoras;
-    }
+	public Date getFechaInicio() {
+		return fechaInicio;
+	}
 
-    public void setMejoras(Mejoras mejoras) {
-        this.mejoras = mejoras != null ? mejoras : new Mejoras();
-    }
+	public void setFechaInicio(Date fechaInicio) {
+		this.fechaInicio = fechaInicio;
+	}
 
-    public long getTiempoPartida() {
-        return tiempoPartida;
-    }
+	public long getPrecioRaspberry() {
+		return mejoras.getPrecioRaspberry();
+	}
 
-    public void setTiempoPartida(long tiempoPartida) {
-        this.tiempoPartida = tiempoPartida;
-    }
+	public long getPrecioPc() {
+		return mejoras.getPrecioPc();
+	}
 
-    public Date getFechaInicio() {
-        return fechaInicio;
-    }
+	public long getPrecioJunior() {
+		return mejoras.getPrecioJunior();
+	}
 
-    public void setFechaInicio(Date fechaInicio) {
-        this.fechaInicio = fechaInicio;
-    }
+	public long getPrecioSenior() {
+		return mejoras.getPrecioSenior();
+	}
 
-    public long getPrecioRaspberry() {
-        return mejoras.getPrecioRaspberry();
-    }
+	public long getPrecioCafe() {
+		return mejoras.getPrecioCafe();
+	}
 
-    public long getPrecioPc() {
-        return mejoras.getPrecioPc();
-    }
-
-    public long getPrecioJunior() {
-        return mejoras.getPrecioJunior();
-    }
-
-    public long getPrecioSenior() {
-        return mejoras.getPrecioSenior();
-    }
-
-    public long getPrecioCafe() {
-        return mejoras.getPrecioCafe();
-    }
-
-    public long getPrecioRgbs() {
-        return mejoras.getPrecioRgbs();
-    }
+	public long getPrecioRgbs() {
+		return mejoras.getPrecioRgbs();
+	}
 }
