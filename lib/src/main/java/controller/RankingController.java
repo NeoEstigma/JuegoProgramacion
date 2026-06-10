@@ -106,6 +106,10 @@ public class RankingController implements Initializable {
 		/*
 		 * Aquí deberías cargar los datos reales desde JSON, MongoDB local o donde estés
 		 * guardando el ranking.
+		 * 
+		 * RankingDao rankingDao = new RankingDao(); List<Ranking> datos =
+		 * rankingDao.obtenerTodos(); listaRanking.addAll(datos); (habría que meter
+		 * estos imports:import java.util.List; import model.RankingDao;)
 		 */
 
 		// Ejemplo temporal
