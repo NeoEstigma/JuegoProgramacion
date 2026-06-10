@@ -63,13 +63,6 @@ public class GameController {
 		actualizarVista();
 	}
 
-	public void cargarPartida(Partida partidaGuardada) {
-		this.partida = partidaGuardada;
-		partida.comprarTodos();
-		terminalArea.appendText("> Partida cargada. Bienvenido, " + partida.getJugador() + "\n");
-		actualizarVista();
-	}
-
 	private void iniciarTimeline() {
 		produccionPasiva = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
 			if (partida != null && !partida.estaTerminado()) {
