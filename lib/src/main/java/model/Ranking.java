@@ -1,14 +1,13 @@
 package model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Ranking {
 	private String jugador;
 	private long dp;
 	private int nivel;
-
 	private Mejoras mejoras;
-
 	private long tiempoPartida;
 	private Date fechaInicio;
 
@@ -72,4 +71,19 @@ public class Ranking {
 		this.fechaInicio = fechaInicio;
 	}
 
+	// ── Formateo ──
+
+	public String getTiempoFormateado() {
+		long minutos = tiempoPartida / 60;
+		long seg = tiempoPartida % 60;
+		return minutos + " min " + seg + " s";
+	}
+
+	public String getFechaFormateada() {
+		if (fechaInicio == null) {
+			return "Sin fecha";
+		}
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		return formato.format(fechaInicio);
+	}
 }

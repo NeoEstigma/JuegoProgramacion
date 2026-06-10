@@ -1,8 +1,7 @@
 package controller;
 
 import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.beans.property.SimpleIntegerProperty;
@@ -19,13 +18,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
+import model.Mejoras;
 import model.Ranking;
+import model.RankingDao;
 
 public class RankingController implements Initializable {
 
 	@FXML
 	private TableView<Ranking> tablaRanking;
-
 	@FXML
 	private TableColumn<Ranking, Number> colPosicion;
 	@FXML
@@ -34,7 +34,6 @@ public class RankingController implements Initializable {
 	private TableColumn<Ranking, Number> colDp;
 	@FXML
 	private TableColumn<Ranking, Number> colNivel;
-
 	@FXML
 	private TableColumn<Ranking, Number> colRaspberry;
 	@FXML
@@ -47,12 +46,10 @@ public class RankingController implements Initializable {
 	private TableColumn<Ranking, Number> colMaqCafe;
 	@FXML
 	private TableColumn<Ranking, Number> colRGBS;
-
 	@FXML
 	private TableColumn<Ranking, String> colTiempo;
 	@FXML
 	private TableColumn<Ranking, String> colFecha;
-
 	@FXML
 	private Button btnVolver;
 	@FXML
@@ -75,47 +72,50 @@ public class RankingController implements Initializable {
 
 		colNivel.setCellValueFactory(cell -> new SimpleIntegerProperty(cell.getValue().getNivel()));
 
-		colRaspberry
-				.setCellValueFactory(cell -> new SimpleIntegerProperty(cell.getValue().getMejoras().getNumRaspberry()));
+		colRaspberry.setCellValueFactory(cell -> {
+			Mejoras m = cell.getValue().getMejoras();
+			return new SimpleIntegerProperty(m != null ? m.getNumRaspberry() : 0);
+		});
 
-		colPC.setCellValueFactory(cell -> new SimpleIntegerProperty(cell.getValue().getMejoras().getNumPC()));
+		colPC.setCellValueFactory(cell -> {
+			Mejoras m = cell.getValue().getMejoras();
+			return new SimpleIntegerProperty(m != null ? m.getNumPC() : 0);
+		});
 
-		colJunior.setCellValueFactory(cell -> new SimpleIntegerProperty(cell.getValue().getMejoras().getNumJunior()));
+		colJunior.setCellValueFactory(cell -> {
+			Mejoras m = cell.getValue().getMejoras();
+			return new SimpleIntegerProperty(m != null ? m.getNumJunior() : 0);
+		});
 
-		colSenior.setCellValueFactory(cell -> new SimpleIntegerProperty(cell.getValue().getMejoras().getNumSenior()));
+		colSenior.setCellValueFactory(cell -> {
+			Mejoras m = cell.getValue().getMejoras();
+			return new SimpleIntegerProperty(m != null ? m.getNumSenior() : 0);
+		});
 
-		colMaqCafe.setCellValueFactory(cell -> new SimpleIntegerProperty(cell.getValue().getMejoras().getNumMaqCafe()));
+		colMaqCafe.setCellValueFactory(cell -> {
+			Mejoras m = cell.getValue().getMejoras();
+			return new SimpleIntegerProperty(m != null ? m.getNumMaqCafe() : 0);
+		});
 
-		colRGBS.setCellValueFactory(cell -> new SimpleIntegerProperty(cell.getValue().getMejoras().getNumRGBS()));
+		colRGBS.setCellValueFactory(cell -> {
+			Mejoras m = cell.getValue().getMejoras();
+			return new SimpleIntegerProperty(m != null ? m.getNumRGBS() : 0);
+		});
 
-		colTiempo.setCellValueFactory(
-				cell -> new SimpleStringProperty(formatearTiempo(cell.getValue().getTiempoPartida())));
+		colTiempo.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getTiempoFormateado()));
 
-		colFecha.setCellValueFactory(
-				cell -> new SimpleStringProperty(formatearFecha(cell.getValue().getFechaInicio())));
+		colFecha.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getFechaFormateada()));
 
 		tablaRanking.setItems(listaRanking);
-
 		actualizarRanking();
 	}
 
 	@FXML
 	private void actualizarRanking() {
 		listaRanking.clear();
-
-		/*
-		 * Aquí deberías cargar los datos reales desde JSON, MongoDB local o donde estés
-		 * guardando el ranking.
-		 * 
-		 * RankingDao rankingDao = new RankingDao(); List<Ranking> datos =
-		 * rankingDao.obtenerTodos(); listaRanking.addAll(datos); (habría que meter
-		 * estos imports:import java.util.List; import model.RankingDao;)
-		 */
-
-		// Ejemplo temporal
-		listaRanking.add(new Ranking("Neo", 1500, 4, null, 320, new Date()));
-		listaRanking.add(new Ranking("Admin", 900, 3, null, 250, new Date()));
-		listaRanking.add(new Ranking("Hacker", 500, 2, null, 180, new Date()));
+		RankingDao rankingDao = new RankingDao();
+		List<Ranking> datos = rankingDao.obtenerTodos();
+		listaRanking.addAll(datos);
 	}
 
 	@FXML
@@ -124,37 +124,14 @@ public class RankingController implements Initializable {
 		tablaRanking.refresh();
 	}
 
-	private String formatearTiempo(long segundos) {
-		long minutos = segundos / 60;
-		long seg = segundos % 60;
-
-		return minutos + " min " + seg + " s";
-	}
-
-	private String formatearFecha(Date fecha) {
-		if (fecha == null) {
-			return "Sin fecha";
-		}
-
-		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-		return formato.format(fecha);
-	}
-
 	@FXML
 	private void volver() {
-
 		try {
-
 			Parent root = FXMLLoader.load(getClass().getResource("/View/Menu.fxml"));
-
 			Stage stage = (Stage) btnVolver.getScene().getWindow();
-
 			Scene scene = new Scene(root);
-
 			scene.getStylesheets().add(getClass().getResource("/View/style.css").toExternalForm());
-
 			stage.setScene(scene);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
