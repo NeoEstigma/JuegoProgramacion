@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Ranking {
 	private String jugador;
-	private int dp;
+	private long dp;
 	private int nivel;
 
 	private Mejoras mejoras;
@@ -15,7 +15,7 @@ public class Ranking {
 	public Ranking() {
 	}
 
-	public Ranking(String jugador, int dp, int nivel, Mejoras mejoras, long tiempoPartida, Date fechaInicio) {
+	public Ranking(String jugador, long dp, int nivel, Mejoras mejoras, long tiempoPartida, Date fechaInicio) {
 		this.jugador = jugador;
 		this.dp = dp;
 		this.nivel = nivel;
@@ -32,11 +32,11 @@ public class Ranking {
 		this.jugador = jugador;
 	}
 
-	public int getDp() {
+	public long getDp() {
 		return dp;
 	}
 
-	public void setDp(int dp) {
+	public void setDp(long dp) {
 		this.dp = dp;
 	}
 
