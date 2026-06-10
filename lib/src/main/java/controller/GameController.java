@@ -50,8 +50,6 @@ public class GameController {
 	@FXML
 	public void initialize() {
 		partida = Partida.getInstancia();
-		System.out.println("GameController instancia: " + partida);
-		System.out.println("Jugador: " + (partida != null ? partida.getJugador() : "NULL"));
 
 		if (partida == null) {
 			terminalArea.appendText("Error: no hay partida iniciada\n");
@@ -62,12 +60,6 @@ public class GameController {
 		terminalArea.appendText("Sistema iniciado...\n");
 		terminalArea.appendText("> Operador: " + partida.getJugador() + "\n");
 		terminalArea.appendText("> Rango actual: " + partida.getNombreNivel() + "\n");
-		actualizarVista();
-	}
-
-	public void cargarPartida(Partida partidaGuardada) {
-		this.partida = partidaGuardada;
-		terminalArea.appendText("> Partida cargada. Bienvenido, " + partida.getJugador() + "\n");
 		actualizarVista();
 	}
 
