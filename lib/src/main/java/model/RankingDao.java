@@ -28,6 +28,10 @@ public class RankingDao {
 		coleccion.insertOne(doc);
 	}
 
+	public void eliminarTodo() {
+		coleccion.deleteMany(new Document());
+	}
+
 	public void guardarOActualizar(Ranking ranking) {
 		if (ranking == null) {
 			return;
