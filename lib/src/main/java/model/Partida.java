@@ -309,10 +309,6 @@ public class Partida {
 		}
 	}
 
-	public boolean isTerminado() {
-		return terminado;
-	}
-
 	public void setTerminado(boolean terminado) {
 		this.terminado = terminado;
 	}
