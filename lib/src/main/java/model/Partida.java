@@ -17,7 +17,7 @@ public class Partida {
 	private long tiempoPartida;
 	private Date fechaInicio;
 
-	private static final int NIVEL_MAXIMO = 10;
+	private static final int NIVEL_MAXIMO = 5;
 
 	private static final String[] NOMBRES_NIVELES = { "Script Kiddie", "Escaner de Red", "Analista de Sistemas",
 			"Operador Encubierto", "Especialista en Intrusion", "Arquitecto Digital", "Maestro del Backdoor",
@@ -173,7 +173,7 @@ public class Partida {
 		if (dp >= mejoras.getPrecioCafe()) {
 			dp -= mejoras.getPrecioCafe();
 
-			long aumento = Math.max(1, Math.round(dpSegundo * 0.03));
+			long aumento = Math.max(1, Math.round(dpSegundo * 0.1));
 			dpSegundo += aumento;
 
 			mejoras.setNumMaqCafe(mejoras.getNumMaqCafe() + 1);
@@ -193,7 +193,7 @@ public class Partida {
 		if (dp >= mejoras.getPrecioRgbs()) {
 			dp -= mejoras.getPrecioRgbs();
 
-			long aumento = Math.max(1, Math.round(dpSegundo * 0.10));
+			long aumento = Math.max(1, Math.round(dpSegundo * 0.50));
 			dpSegundo += aumento;
 
 			mejoras.setNumRGBS(mejoras.getNumRGBS() + 1);
