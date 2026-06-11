@@ -123,34 +123,49 @@ public class RankingController implements Initializable {
 		List<Ranking> datos = rankingDao.obtenerTodos();
 		listaRanking.addAll(datos);
 	}
-
 	@FXML
 	private void eliminarRanking() {
-		Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
-		alerta.setTitle("Eliminar ranking");
-		alerta.setHeaderText(null);
-		alerta.setContentText("¿Seguro que quieres eliminar todo el ranking? Esta acción no se puede deshacer.");
 
-		alerta.showAndWait().ifPresent(respuesta -> {
-			if (respuesta == ButtonType.OK) {
-				RankingDao rankingDao = new RankingDao();
-				rankingDao.eliminarTodo();
-				listaRanking.clear();
-				tablaRanking.refresh();
-			}
-		});
+	    Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
+
+	    alerta.setTitle("Eliminar ranking");
+	    alerta.setHeaderText(null);
+	    alerta.setContentText(
+	            "¿Seguro que quieres eliminar todo el ranking? Esta acción no se puede deshacer.");
+
+	    alerta.setGraphic(null);
+	    alerta.getDialogPane().setGraphic(null);
+
+	    alerta.getDialogPane().getStylesheets()
+	            .add(getClass().getResource("/View/style.css").toExternalForm());
+
+	    alerta.getDialogPane().getStyleClass().add("terminal-dialog");
+
+	    alerta.showAndWait().ifPresent(respuesta -> {
+
+	        if (respuesta == ButtonType.OK) {
+
+	            RankingDao rankingDao = new RankingDao();
+	            rankingDao.eliminarTodo();
+
+	            listaRanking.clear();
+	            tablaRanking.refresh();
+	        }
+	    });
 	}
 
 	@FXML
 	private void volver() {
-		try {
-			Parent root = FXMLLoader.load(getClass().getResource("/View/Menu.fxml"));
-			Stage stage = (Stage) btnVolver.getScene().getWindow();
-			Scene scene = new Scene(root);
-			scene.getStylesheets().add(getClass().getResource("/View/style.css").toExternalForm());
-			stage.setScene(scene);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	    try {
+	        Parent root = FXMLLoader.load(getClass().getResource("/View/Menu.fxml"));
+
+	        Stage stage = (Stage) btnVolver.getScene().getWindow();
+
+	        stage.getScene().setRoot(root);
+	        stage.setMaximized(true);
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
 	}
 }
