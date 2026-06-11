@@ -14,7 +14,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
@@ -124,8 +126,19 @@ public class RankingController implements Initializable {
 
 	@FXML
 	private void eliminarRanking() {
-		listaRanking.clear();
-		tablaRanking.refresh();
+		Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
+		alerta.setTitle("Eliminar ranking");
+		alerta.setHeaderText(null);
+		alerta.setContentText("¿Seguro que quieres eliminar todo el ranking? Esta acción no se puede deshacer.");
+
+		alerta.showAndWait().ifPresent(respuesta -> {
+			if (respuesta == ButtonType.OK) {
+				RankingDao rankingDao = new RankingDao();
+				rankingDao.eliminarTodo();
+				listaRanking.clear();
+				tablaRanking.refresh();
+			}
+		});
 	}
 
 	@FXML
