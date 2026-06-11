@@ -22,7 +22,7 @@ import model.RankingDao;
 public class GameController {
 
 	@FXML
-	private Label lblDataPoints, lblDpSegundo, lblNivel, lblDpPorClick;
+	private Label lblDataPoints, lblDpSegundo, lblNivel, lblDpPorClick, lblOperador;
 	@FXML
 	private Label lblRaspberryValor, lblRaspberryPrecio, lblRaspberryEstado;
 	@FXML
@@ -57,6 +57,7 @@ public class GameController {
 		}
 
 		iniciarTimeline();
+		lblOperador.setText(partida.getJugador());
 		terminalArea.appendText("Sistema iniciado...\n");
 		terminalArea.appendText("> Operador: " + partida.getJugador() + "\n");
 		terminalArea.appendText("> Rango actual: " + partida.getNombreNivel() + "\n");
