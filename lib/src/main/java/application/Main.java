@@ -10,48 +10,52 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-	@Override
-	public void start(Stage primaryStage) {
+    @Override
+    public void start(Stage primaryStage) {
 
-		try {
-			URL fxml = getClass().getResource("/View/Menu.fxml");
-			System.out.println("FXML = " + fxml);
+        try {
+            URL fxml = getClass().getResource("/View/Menu.fxml");
+            System.out.println("FXML = " + fxml);
 
-			URL css = getClass().getResource("/View/style.css");
-			System.out.println("CSS = " + css);
+            URL css = getClass().getResource("/View/style.css");
+            System.out.println("CSS = " + css);
 
-			FXMLLoader loader = new FXMLLoader(fxml);
-			Parent root = loader.load();
+            FXMLLoader loader = new FXMLLoader(fxml);
+            Parent root = loader.load();
 
-			Scene scene = new Scene(root);
+            Scene scene = new Scene(root, 420, 550);
 
-			if (css != null) {
-				scene.getStylesheets().add(css.toExternalForm());
-			}
+            if (css != null) {
+                scene.getStylesheets().add(css.toExternalForm());
+            }
 
-			primaryStage.setTitle("Terminal Clicker");
-			primaryStage.setScene(scene);
-			primaryStage.show();
+            primaryStage.setTitle("Terminal Clicker");
 
-		} catch (Exception e) {
+            primaryStage.setScene(scene);
 
-			System.out.println("===== ERROR =====");
-			System.out.println("Tipo: " + e.getClass().getName());
-			System.out.println("Mensaje: " + e.getMessage());
+            primaryStage.setMaximized(true);
 
-			Throwable causa = e.getCause();
+            primaryStage.show();
 
-			while (causa != null) {
-				System.out.println("Causa: " + causa.getClass().getName());
-				System.out.println("Mensaje causa: " + causa.getMessage());
-				causa = causa.getCause();
-			}
+        } catch (Exception e) {
 
-			e.printStackTrace();
-		}
-	}
+            System.out.println("===== ERROR =====");
+            System.out.println("Tipo: " + e.getClass().getName());
+            System.out.println("Mensaje: " + e.getMessage());
 
-	public static void main(String[] args) {
-		launch(args);
-	}
+            Throwable causa = e.getCause();
+
+            while (causa != null) {
+                System.out.println("Causa: " + causa.getClass().getName());
+                System.out.println("Mensaje causa: " + causa.getMessage());
+                causa = causa.getCause();
+            }
+
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
 }

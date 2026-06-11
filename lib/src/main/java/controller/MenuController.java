@@ -29,15 +29,14 @@ public class MenuController {
 
 	@FXML
 	private void continuarPartida() {
-		Partida guardada = partidaDao.cargarUnica();
-		guardada.comprarTodos();
+	    Partida guardada = partidaDao.cargarUnica();
 
-		if (guardada != null) {
-			Partida.setInstancia(guardada);
-			cargarVista("/View/Game.fxml");
-		}
+	    if (guardada != null) {
+	        guardada.comprarTodos();
+	        Partida.setInstancia(guardada);
+	        cargarVista("/View/Game.fxml");
+	    }
 	}
-
 	@FXML
 	private void nuevaPartida() {
 		TextInputDialog dialog = new TextInputDialog();
@@ -70,25 +69,24 @@ public class MenuController {
 	}
 
 	private void cargarVista(String ruta) {
-		try {
-			URL fxml = getClass().getResource(ruta);
+	    try {
+	        URL fxml = getClass().getResource(ruta);
 
-			if (fxml == null) {
-				throw new IOException("No se encontró el FXML: " + ruta);
-			}
+	        if (fxml == null) {
+	            throw new IOException("No se encontró el FXML: " + ruta);
+	        }
 
-			FXMLLoader loader = new FXMLLoader(fxml);
-			Parent root = loader.load();
+	        FXMLLoader loader = new FXMLLoader(fxml);
+	        Parent root = loader.load();
 
-			Stage stage = (Stage) btnContinuar.getScene().getWindow();
-			Scene scene = new Scene(root);
+	        Stage stage = (Stage) btnContinuar.getScene().getWindow();
 
-			stage.setScene(scene);
-			stage.show();
+	        stage.getScene().setRoot(root);
+	        stage.setMaximized(true);
 
-		} catch (IOException e) {
-			System.out.println("Error al cargar vista: " + e.getMessage());
-			e.printStackTrace();
-		}
+	    } catch (IOException e) {
+	        System.out.println("Error al cargar vista: " + e.getMessage());
+	        e.printStackTrace();
+	    }
 	}
 }
