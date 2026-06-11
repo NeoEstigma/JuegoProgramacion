@@ -61,10 +61,14 @@ public class RankingController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		listaRanking = FXCollections.observableArrayList();
+	    listaRanking = FXCollections.observableArrayList();
 
-		colPosicion.setCellValueFactory(
-				cell -> new SimpleIntegerProperty(tablaRanking.getItems().indexOf(cell.getValue()) + 1));
+	    tablaRanking.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+	    colPosicion.setCellValueFactory(
+	            cell -> new SimpleIntegerProperty(tablaRanking.getItems().indexOf(cell.getValue()) + 1));
+
+	    // resto de tu código igual...
 
 		colJugador.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getJugador()));
 
