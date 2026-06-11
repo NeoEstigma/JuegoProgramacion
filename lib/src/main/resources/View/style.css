@@ -213,7 +213,50 @@
 .scroll-bar .decrement-button {
     -fx-background-color: #050505;
 }
+/* ===== DIALOG ===== */
 
+.terminal-dialog {
+    -fx-background-color: #050505;
+    -fx-border-color: #00ff66;
+    -fx-border-width: 2;
+}
+
+.terminal-dialog .label {
+    -fx-text-fill: #00ff66;
+    -fx-font-family: "Consolas";
+}
+
+.terminal-dialog .text-field {
+    -fx-background-color: black;
+    -fx-text-fill: #00ff66;
+    -fx-border-color: #00ff66;
+    -fx-highlight-fill: #00ff66;
+    -fx-highlight-text-fill: black;
+}
+
+.terminal-dialog .button {
+    -fx-background-color: #101010;
+    -fx-border-color: #00ff66;
+    -fx-text-fill: #00ff66;
+}
+.terminal-dialog .graphic-container {
+    -fx-max-width: 0;
+    -fx-pref-width: 0;
+    -fx-min-width: 0;
+    -fx-padding: 0;
+}
+.dialog-pane > .content.label {
+    -fx-padding: 10 10 10 10;
+}
+
+.terminal-dialog .graphic {
+    -fx-opacity: 0;
+}
+
+.terminal-dialog .button:hover {
+    -fx-background-color: #00ff66;
+    -fx-text-fill: black;
+}
 .scroll-bar .increment-arrow,
 .scroll-bar .decrement-arrow {
     -fx-background-color: #00ff66;

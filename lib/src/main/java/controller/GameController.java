@@ -181,15 +181,28 @@ public class GameController {
 	}
 
 	private void volverAlMenu() {
-		produccionPasiva.stop();
-		try {
-			URL fxml = getClass().getResource("/View/Menu.fxml");
-			Parent root = FXMLLoader.load(fxml);
-			Stage stage = (Stage) terminalArea.getScene().getWindow();
-			stage.setScene(new Scene(root));
-		} catch (IOException e) {
-			System.out.println("Error al volver al menú: " + e.getMessage());
-		}
+	    if (produccionPasiva != null) {
+	        produccionPasiva.stop();
+	    }
+
+	    try {
+	        URL fxml = getClass().getResource("/View/Menu.fxml");
+
+	        if (fxml == null) {
+	            throw new IOException("No se encontró Menu.fxml");
+	        }
+
+	        Parent root = FXMLLoader.load(fxml);
+
+	        Stage stage = (Stage) terminalArea.getScene().getWindow();
+
+	        stage.getScene().setRoot(root);
+	        stage.setMaximized(true);
+
+	    } catch (IOException e) {
+	        System.out.println("Error al volver al menú: " + e.getMessage());
+	        e.printStackTrace();
+	    }
 	}
 
 	private void actualizarVista() {

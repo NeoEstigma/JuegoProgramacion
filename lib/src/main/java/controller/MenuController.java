@@ -40,11 +40,19 @@ public class MenuController {
 	@FXML
 	private void nuevaPartida() {
 		TextInputDialog dialog = new TextInputDialog();
+
 		dialog.setTitle("Nueva partida");
 		dialog.setHeaderText(null);
 		dialog.setContentText("Introduce tu nombre:");
 
-		Optional<String> resultado = dialog.showAndWait();
+		dialog.setGraphic(null);
+
+	    dialog.getDialogPane().getStylesheets()
+	            .add(getClass().getResource("/View/style.css").toExternalForm());
+
+	    dialog.getDialogPane().getStyleClass().add("terminal-dialog");
+
+	    Optional<String> resultado = dialog.showAndWait();
 
 		resultado.ifPresent(nombre -> {
 			String nombreLimpio = nombre.trim();
