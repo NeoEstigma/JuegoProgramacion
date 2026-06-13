@@ -133,6 +133,7 @@ public class GameController {
 
 	@FXML
 	private void avanzarProgreso() {
+		guardarEnRanking();
 		String msg = partida.avanzarProgreso();
 		if ("FIN".equals(msg)) {
 			terminarJuego();
@@ -187,25 +188,22 @@ public class GameController {
 
 	@FXML
 	private void salir() {
-		    Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
-		    alerta.setTitle("Salir");
-		    alerta.setHeaderText(null);
-		    alerta.setGraphic(null);
-		    alerta.setContentText("¿Seguro que quieres salir? Los cambios no guardados se perderán.");
+		Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
+		alerta.setTitle("Salir");
+		alerta.setHeaderText(null);
+		alerta.setGraphic(null);
+		alerta.setContentText("¿Seguro que quieres salir? Los cambios no guardados se perderán.");
 
-		    alerta.getDialogPane().getStylesheets().add(
-		            getClass().getResource("/View/style.css").toExternalForm()
-		        );
-		    
-		        alerta.getDialogPane().getStyleClass().add("terminal-dialog");
-		    alerta.showAndWait().ifPresent(respuesta -> {
-		        if (respuesta == ButtonType.OK) {
-		            terminalArea.appendText("> saliendo sin guardar\n");
-		            volverAlMenu();
-		        }
-		    });
-		}
-	
+		alerta.getDialogPane().getStylesheets().add(getClass().getResource("/View/style.css").toExternalForm());
+
+		alerta.getDialogPane().getStyleClass().add("terminal-dialog");
+		alerta.showAndWait().ifPresent(respuesta -> {
+			if (respuesta == ButtonType.OK) {
+				terminalArea.appendText("> saliendo sin guardar\n");
+				volverAlMenu();
+			}
+		});
+	}
 
 	private void volverAlMenu() {
 		if (produccionPasiva != null) {

@@ -7,7 +7,6 @@ import java.util.Optional;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
@@ -29,14 +28,15 @@ public class MenuController {
 
 	@FXML
 	private void continuarPartida() {
-	    Partida guardada = partidaDao.cargarUnica();
+		Partida guardada = partidaDao.cargarUnica();
 
-	    if (guardada != null) {
-	        guardada.comprarTodos();
-	        Partida.setInstancia(guardada);
-	        cargarVista("/View/Game.fxml");
-	    }
+		if (guardada != null) {
+			guardada.recalcularPrecios();
+			Partida.setInstancia(guardada);
+			cargarVista("/View/Game.fxml");
+		}
 	}
+
 	@FXML
 	private void nuevaPartida() {
 		TextInputDialog dialog = new TextInputDialog();
@@ -47,12 +47,11 @@ public class MenuController {
 
 		dialog.setGraphic(null);
 
-	    dialog.getDialogPane().getStylesheets()
-	            .add(getClass().getResource("/View/style.css").toExternalForm());
+		dialog.getDialogPane().getStylesheets().add(getClass().getResource("/View/style.css").toExternalForm());
 
-	    dialog.getDialogPane().getStyleClass().add("terminal-dialog");
+		dialog.getDialogPane().getStyleClass().add("terminal-dialog");
 
-	    Optional<String> resultado = dialog.showAndWait();
+		Optional<String> resultado = dialog.showAndWait();
 
 		resultado.ifPresent(nombre -> {
 			String nombreLimpio = nombre.trim();
@@ -77,24 +76,24 @@ public class MenuController {
 	}
 
 	private void cargarVista(String ruta) {
-	    try {
-	        URL fxml = getClass().getResource(ruta);
+		try {
+			URL fxml = getClass().getResource(ruta);
 
-	        if (fxml == null) {
-	            throw new IOException("No se encontró el FXML: " + ruta);
-	        }
+			if (fxml == null) {
+				throw new IOException("No se encontró el FXML: " + ruta);
+			}
 
-	        FXMLLoader loader = new FXMLLoader(fxml);
-	        Parent root = loader.load();
+			FXMLLoader loader = new FXMLLoader(fxml);
+			Parent root = loader.load();
 
-	        Stage stage = (Stage) btnContinuar.getScene().getWindow();
+			Stage stage = (Stage) btnContinuar.getScene().getWindow();
 
-	        stage.getScene().setRoot(root);
-	        stage.setMaximized(true);
+			stage.getScene().setRoot(root);
+			stage.setMaximized(true);
 
-	    } catch (IOException e) {
-	        System.out.println("Error al cargar vista: " + e.getMessage());
-	        e.printStackTrace();
-	    }
+		} catch (IOException e) {
+			System.out.println("Error al cargar vista: " + e.getMessage());
+			e.printStackTrace();
+		}
 	}
 }
