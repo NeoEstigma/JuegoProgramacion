@@ -7,6 +7,7 @@ import java.util.Optional;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
@@ -23,12 +24,13 @@ public class MenuController {
 	@FXML
 	public void initialize() {
 		Partida guardada = partidaDao.cargarUnica();
-		btnContinuar.setDisable(guardada == null);
 
-		if (guardada.estaTerminado()) {
+		if (guardada != null && guardada.estaTerminado()) {
 			partidaDao.eliminarUnica();
-			btnContinuar.setDisable(guardada == null);
+			guardada = null;
 		}
+
+		btnContinuar.setDisable(guardada == null);
 	}
 
 	@FXML
@@ -83,7 +85,6 @@ public class MenuController {
 	private void cargarVista(String ruta) {
 		try {
 			URL fxml = getClass().getResource(ruta);
-
 			if (fxml == null) {
 				throw new IOException("No se encontró el FXML: " + ruta);
 			}
@@ -93,7 +94,10 @@ public class MenuController {
 
 			Stage stage = (Stage) btnContinuar.getScene().getWindow();
 
-			stage.getScene().setRoot(root);
+			Scene nuevaEscena = new Scene(root);
+			nuevaEscena.getStylesheets().add(getClass().getResource("/View/style.css").toExternalForm());
+
+			stage.setScene(nuevaEscena);
 			stage.setMaximized(true);
 
 		} catch (IOException e) {
