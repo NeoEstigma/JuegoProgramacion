@@ -24,7 +24,7 @@
         <HBox spacing="20">
             <VBox spacing="5">
                 <Label text="RANKING DE JUGADORES" styleClass="titulo-ranking"/>
-                <Label text="Terminal Clicker - Mejores partidas guardadas" styleClass="subtitulo-ranking"/>
+                <Label text="Terminal Clicker - Partidas guardadas" styleClass="subtitulo-ranking"/>
             </VBox>
         </HBox>
 
