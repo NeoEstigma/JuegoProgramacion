@@ -304,3 +304,15 @@
 .hack-button:hover .label {
     -fx-text-fill: #00ff66;
 }
+
+/* ===== TOOLTIP ===== */
+
+.tooltip {
+    -fx-background-color: #050505;
+    -fx-text-fill: #00ff66;
+    -fx-border-color: #00ff66;
+    -fx-border-width: 1;
+    -fx-font-family: "Consolas";
+    -fx-font-size: 13px;
+    -fx-show-delay: 200ms;
+}

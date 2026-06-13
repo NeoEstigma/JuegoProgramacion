@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.control.Tooltip?>
 
 <BorderPane prefHeight="750" prefWidth="1200" stylesheets="@style.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GameController">
 
@@ -142,7 +143,10 @@
                 <Label text="MEJORAS" />
 
                 <Button fx:id="btnRaspberry" maxWidth="Infinity" onAction="#comprarRaspberry">
-                    <graphic>
+   				 	 <tooltip>
+        				<Tooltip text="+1 DP por click. Precio +5% con cada compra." />
+    				 </tooltip>
+           			 <graphic>
                         <VBox alignment="CENTER_LEFT">
                             <Label fx:id="lblRaspberryNombre" text="raspberry.sh" />
                             <HBox spacing="4">
@@ -163,6 +167,9 @@
                 </Button>
 
                 <Button fx:id="btnPc" maxWidth="Infinity" onAction="#comprarPc">
+                	<tooltip>
+        				<Tooltip text="+5 DP por click. Precio +12% con cada compra." />
+    				 </tooltip>
                     <graphic>
                         <VBox alignment="CENTER_LEFT">
                             <Label fx:id="lblPcNombre" text="pc.py" />
@@ -184,6 +191,9 @@
                 </Button>
 
                 <Button fx:id="btnJunior" maxWidth="Infinity" onAction="#comprarJunior">
+                	<tooltip>
+        				<Tooltip text="+10 DP por segundo de forma pasiva. Precio +8% por compra." />
+    				 </tooltip>
                     <graphic>
                         <VBox alignment="CENTER_LEFT">
                             <Label fx:id="lblJuniorNombre" text="junior.py" />
@@ -205,6 +215,9 @@
                 </Button>
 
                 <Button fx:id="btnSenior" maxWidth="Infinity" onAction="#comprarSenior">
+                	<tooltip>
+        				<Tooltip text="+50 DP por click. Precio +10% con cada compra." />
+    				 </tooltip>
                     <graphic>
                         <VBox alignment="CENTER_LEFT">
                             <Label fx:id="lblSeniorNombre" text="senior.sh" />
@@ -226,6 +239,9 @@
                 </Button>
 
                 <Button fx:id="btnCafe" maxWidth="Infinity" onAction="#comprarCafe">
+                	<tooltip>
+        				<Tooltip text="+3% incremental a la producción de Junior y Senior. Precio +35% por compra." />
+    				 </tooltip>
                     <graphic>
                         <VBox alignment="CENTER_LEFT">
                             <Label fx:id="lblCafeNombre" text="coffee.jar" />
@@ -247,6 +263,9 @@
                 </Button>
 
                 <Button fx:id="btnRgbs" maxWidth="Infinity" onAction="#comprarRgbs">
+                	<tooltip>
+        				<Tooltip text="+10% incremental a la producción de Junior y Senior. Precio +50% por compra." />
+    				 </tooltip>
                     <graphic>
                         <VBox alignment="CENTER_LEFT">
                             <Label fx:id="lblRgbsNombre" text="rgbs.exe" />
