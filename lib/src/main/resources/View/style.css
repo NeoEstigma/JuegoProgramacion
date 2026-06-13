@@ -9,6 +9,7 @@
 .titulo-ranking {
     -fx-text-fill: #00ff66;
     -fx-font-weight: bold;
+    -fx-font-size: 52px;
     -fx-effect: dropshadow(gaussian, #00ff66, 6, 0.3, 0, 0);
 }
 

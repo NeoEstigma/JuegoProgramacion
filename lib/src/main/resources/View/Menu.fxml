@@ -7,17 +7,17 @@
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@style.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MenuController">
 
-    <VBox alignment="CENTER" maxWidth="420" spacing="25" StackPane.alignment="CENTER">
+    <VBox alignment="CENTER" maxWidth="620" spacing="25" StackPane.alignment="CENTER">
 
         <Label styleClass="app-title" text="TERMINAL CLICKER" />
 
-        <Button fx:id="btnContinuar" maxWidth="Infinity" onAction="#continuarPartida" text="CONTINUAR" />
+        <Button fx:id="btnContinuar" maxWidth="300" onAction="#continuarPartida" text="CONTINUAR" />
 
-        <Button fx:id="btnNuevaPartida" maxWidth="Infinity" onAction="#nuevaPartida" text="NUEVA PARTIDA" />
+        <Button fx:id="btnNuevaPartida" maxWidth="300" onAction="#nuevaPartida" text="NUEVA PARTIDA" />
 
-        <Button fx:id="btnRanking" maxWidth="Infinity" onAction="#mostrarRanking" text="RANKING" />
+        <Button fx:id="btnRanking" maxWidth="300" onAction="#mostrarRanking" text="RANKING" />
 
-        <Button fx:id="btnSalirJuego" maxWidth="Infinity" onAction="#salir" text="SALIR" />
+        <Button fx:id="btnSalirJuego" maxWidth="300" onAction="#salir" text="SALIR" />
 
     </VBox>
 
