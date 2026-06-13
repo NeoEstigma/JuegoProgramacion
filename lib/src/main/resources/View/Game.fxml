@@ -148,7 +148,7 @@
                             <HBox spacing="4">
                                 <Label text="+" />
                                 <Label fx:id="lblRaspberryValor" text="1" />
-                                <Label fx:id="lblRaspberryTipo" prefHeight="17.0" prefWidth="48.0" text="DP/click" />
+                                <Label fx:id="lblRaspberryTipo" prefHeight="17.0" prefWidth="58.0" text="DP/click" />
                             </HBox>
                             <HBox spacing="4">
                                 <Label fx:id="lblRaspberryPrecio" text="50" />

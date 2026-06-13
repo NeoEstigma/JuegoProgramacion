@@ -76,17 +76,23 @@
     -fx-border-color: #00ff66;
 }
 
-.menu-item .label {
+.context-menu .menu-item {
+    -fx-background-color: #050505;
+}
+
+.context-menu .menu-item .label {
     -fx-text-fill: #00ff66;
 }
 
-.menu-item:focused {
+.context-menu .menu-item:hover {
     -fx-background-color: #00ff66;
 }
 
-.menu-item:focused .label {
+.context-menu .menu-item:hover .label {
     -fx-text-fill: black;
 }
+
+
 
 /* ===== TERMINAL ===== */
 
