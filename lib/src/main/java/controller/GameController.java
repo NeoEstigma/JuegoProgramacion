@@ -8,17 +8,16 @@ import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import model.FrasesDao;
 import model.Partida;
 import model.PartidaDao;
 import model.Ranking;
 import model.RankingDao;
-import model.FrasesDao;
 
 public class GameController {
 
@@ -67,22 +66,22 @@ public class GameController {
 	}
 
 	private void iniciarTimeline() {
-	    produccionPasiva = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
-	        if (partida != null && !partida.estaTerminado()) {
-	            partida.tickSegundo();
-	            actualizarVista();
+		produccionPasiva = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
+			if (partida != null && !partida.estaTerminado()) {
+				partida.tickSegundo();
+				actualizarVista();
 
-	            // Muestra frase cada 10 segundos si hay producción pasiva
-	            if (partida.getDpSegundo() > 0 && partida.getTiempoPartida() % 10 == 0) {
-	                String frase = frasesDao.getFraseAleatoria();
-	                if (!frase.isEmpty()) {
-	                    terminalArea.appendText(frase + "\n");
-	                }
-	            }
-	        }
-	    }));
-	    produccionPasiva.setCycleCount(Timeline.INDEFINITE);
-	    produccionPasiva.play();
+				// Muestra frase cada 10 segundos si hay producción pasiva
+				if (partida.getDpSegundo() > 0 && partida.getTiempoPartida() % 10 == 0) {
+					String frase = frasesDao.getFraseAleatoria();
+					if (!frase.isEmpty()) {
+						terminalArea.appendText(frase + "\n");
+					}
+				}
+			}
+		}));
+		produccionPasiva.setCycleCount(Timeline.INDEFINITE);
+		produccionPasiva.play();
 	}
 
 	@FXML
@@ -191,28 +190,28 @@ public class GameController {
 	}
 
 	private void volverAlMenu() {
-	    if (produccionPasiva != null) {
-	        produccionPasiva.stop();
-	    }
+		if (produccionPasiva != null) {
+			produccionPasiva.stop();
+		}
 
-	    try {
-	        URL fxml = getClass().getResource("/View/Menu.fxml");
+		try {
+			URL fxml = getClass().getResource("/View/Menu.fxml");
 
-	        if (fxml == null) {
-	            throw new IOException("No se encontró Menu.fxml");
-	        }
+			if (fxml == null) {
+				throw new IOException("No se encontró Menu.fxml");
+			}
 
-	        Parent root = FXMLLoader.load(fxml);
+			Parent root = FXMLLoader.load(fxml);
 
-	        Stage stage = (Stage) terminalArea.getScene().getWindow();
+			Stage stage = (Stage) terminalArea.getScene().getWindow();
 
-	        stage.getScene().setRoot(root);
-	        stage.setMaximized(true);
+			stage.getScene().setRoot(root);
+			stage.setMaximized(true);
 
-	    } catch (IOException e) {
-	        System.out.println("Error al volver al menú: " + e.getMessage());
-	        e.printStackTrace();
-	    }
+		} catch (IOException e) {
+			System.out.println("Error al volver al menú: " + e.getMessage());
+			e.printStackTrace();
+		}
 	}
 
 	private void actualizarVista() {

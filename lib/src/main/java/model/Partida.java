@@ -325,7 +325,7 @@ public class Partida {
 		String lineaSeleccionada = null;
 		int contador = 0;
 
-		try (BufferedReader br = new BufferedReader(new FileReader("/lib/src/main/resources/documents/texto.txt"))) {
+		try (BufferedReader br = new BufferedReader(new FileReader("./lib/src/main/resources/documents/texto.txt"))) {
 			String linea;
 
 			while ((linea = br.readLine()) != null) {
