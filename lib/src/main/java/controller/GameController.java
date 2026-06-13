@@ -8,6 +8,7 @@ import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
@@ -158,8 +159,21 @@ public class GameController {
 		terminalArea.appendText("FIN DEL JUEGO\n");
 		terminalArea.appendText("==============================\n");
 		bloquearMejoras();
+		guardar();
 		guardarEnRanking();
 		terminalArea.appendText("> resultado guardado en ranking\n");
+		int[] segundos = { 5 };
+		terminalArea.appendText("> Volviendo al menu en " + segundos[0] + "...\n");
+
+		Timeline countdown = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
+			segundos[0]--;
+			if (segundos[0] > 0) {
+				terminalArea.appendText("> Volviendo al menu en " + segundos[0] + "...\n");
+			}
+		}));
+		countdown.setCycleCount(5);
+		countdown.setOnFinished(e -> volverAlMenu());
+		countdown.play();
 	}
 
 	private void bloquearMejoras() {
@@ -212,21 +226,23 @@ public class GameController {
 
 		try {
 			URL fxml = getClass().getResource("/View/Menu.fxml");
-
 			if (fxml == null) {
 				throw new IOException("No se encontró Menu.fxml");
 			}
 
-			Parent root = FXMLLoader.load(fxml);
+			FXMLLoader loader = new FXMLLoader(fxml);
+			Parent root = loader.load();
 
 			Stage stage = (Stage) terminalArea.getScene().getWindow();
 
-			stage.getScene().setRoot(root);
+			Scene nuevaEscena = new Scene(root);
+			nuevaEscena.getStylesheets().add(getClass().getResource("/View/style.css").toExternalForm());
+
+			stage.setScene(nuevaEscena);
 			stage.setMaximized(true);
 
 		} catch (IOException e) {
-			System.out.println("Error al volver al menú: " + e.getMessage());
-			e.printStackTrace();
+			System.out.println("Error al volver al menú");
 		}
 	}
 

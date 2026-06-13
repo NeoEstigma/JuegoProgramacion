@@ -24,6 +24,11 @@ public class MenuController {
 	public void initialize() {
 		Partida guardada = partidaDao.cargarUnica();
 		btnContinuar.setDisable(guardada == null);
+
+		if (guardada.estaTerminado()) {
+			partidaDao.eliminarUnica();
+			btnContinuar.setDisable(guardada == null);
+		}
 	}
 
 	@FXML
