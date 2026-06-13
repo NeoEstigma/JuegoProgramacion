@@ -1,6 +1,11 @@
 package model;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Date;
+import java.util.Random;
 
 public class Partida {
 
@@ -19,9 +24,14 @@ public class Partida {
 
 	private static final int NIVEL_MAXIMO = 5;
 
-	private static final String[] NOMBRES_NIVELES = { "Script Kiddie", "Escaner de Red", "Analista de Sistemas",
-			"Operador Encubierto", "Especialista en Intrusion", "Arquitecto Digital", "Maestro del Backdoor",
-			"Fantasma de la Red", "Overmind", "ROOT ABSOLUTO - FINAL" };
+	private static final String[] NOMBRES_NIVELES = { "Script Kiddie", "Pen Tester", "Operador Encubierto",
+			"Especialista en Intrusion", "Maestro del Backdoor" };
+
+	/*
+	 * Otros niveles temporalmente deshabilitados: "Escaner de Red",
+	 * "Arquitecto Digital", "Overmind", "Fantasma de la Red",
+	 * "ROOT ABSOLUTO - FINAL"
+	 */
 
 	private static Partida instancia;
 
@@ -307,6 +317,31 @@ public class Partida {
 		} else {
 			this.nivel = nivel;
 		}
+	}
+
+	public String obtenerFrases() {
+
+		Random random = new Random();
+		String lineaSeleccionada = null;
+		int contador = 0;
+
+		try (BufferedReader br = new BufferedReader(new FileReader("/lib/src/main/resources/documents/texto.txt"))) {
+			String linea;
+
+			while ((linea = br.readLine()) != null) {
+				contador++;
+
+				if (random.nextInt(contador) == 0) {
+					lineaSeleccionada = linea;
+				}
+			}
+		} catch (FileNotFoundException e) {
+			System.out.println("Archivo no encontrado");
+		} catch (IOException e) {
+			System.out.println("No se ha podido leer el archivo");
+		}
+
+		return lineaSeleccionada;
 	}
 
 	public void setTerminado(boolean terminado) {
