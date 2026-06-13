@@ -9,6 +9,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
@@ -186,9 +188,25 @@ public class GameController {
 
 	@FXML
 	private void salir() {
-		terminalArea.appendText("> saliendo sin guardar\n");
-		volverAlMenu();
-	}
+		    Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
+		    alerta.setTitle("Salir");
+		    alerta.setHeaderText(null);
+		    alerta.setGraphic(null);
+		    alerta.setContentText("¿Seguro que quieres salir? Los cambios no guardados se perderán.");
+
+		    alerta.getDialogPane().getStylesheets().add(
+		            getClass().getResource("/View/style.css").toExternalForm()
+		        );
+		    
+		        alerta.getDialogPane().getStyleClass().add("terminal-dialog");
+		    alerta.showAndWait().ifPresent(respuesta -> {
+		        if (respuesta == ButtonType.OK) {
+		            terminalArea.appendText("> saliendo sin guardar\n");
+		            volverAlMenu();
+		        }
+		    });
+		}
+	
 
 	private void volverAlMenu() {
 	    if (produccionPasiva != null) {
