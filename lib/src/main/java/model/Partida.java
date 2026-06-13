@@ -77,7 +77,7 @@ public class Partida {
 	}
 
 	// ── Aumenta todos los precios al cargar partida ──
-	public void comprarTodos() {
+	public void recalcularPrecios() {
 
 		mejoras.setPrecioRaspberry(mejoras.calcularPrecio(50, 1.05, mejoras.getNumRaspberry()));
 		mejoras.setPrecioPc(mejoras.calcularPrecio(200, 1.12, mejoras.getNumPC()));
