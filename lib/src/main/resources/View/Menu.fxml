@@ -5,9 +5,9 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@style.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MenuController">
+<StackPane styleClass="menu-background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@style.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MenuController">
 
-    <VBox alignment="CENTER" maxWidth="620" spacing="25" StackPane.alignment="CENTER">
+    <VBox alignment="CENTER" maxWidth="620" spacing="25" StackPane.alignment="CENTER" styleClass="menu-card">
 
         <Label styleClass="app-title" text="TERMINAL CLICKER" />
 

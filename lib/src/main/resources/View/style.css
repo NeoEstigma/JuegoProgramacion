@@ -325,3 +325,16 @@
     -fx-font-size: 13px;
     -fx-show-delay: 200ms;
 }
+
+/* ===== PARA LA IMAGEN DEL MENÚ ===== */
+
+.menu-background {
+    -fx-background-image: url('../imagenes/fondoNumeros.gif');
+    -fx-background-size: cover;
+    -fx-background-position: center;
+}
+
+.menu-card {
+    -fx-background-color: rgba(0, 0, 0, 0.75);
+    -fx-padding: 40;
+}
