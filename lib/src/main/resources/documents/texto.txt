@@ -25,77 +25,52 @@
 > Alguien dejó una puerta abierta.
 > Alguien dejó cinco puertas abiertas.
 > Analizando registros...
-> Los registros mienten. Los metadatos menos.
-> Fuerza bruta en progreso...
-> Paciencia bruta en progreso...
+> Los registros mienten. Los metadatos lo hacen menos.
+> Fuerza bruta en progreso... Paciencia bruta en progreso...
 > Compilando...
 > Es un milagro que esto compile.
-> Eliminando rastros...
-> O intentándolo.
-> La seguridad perfecta no existe.
-> Pero las malas configuraciones sí.
-> Usuario conectado: admin
-> Contraseña: admin
+> Eliminando rastros... O intentándolo.
+> La seguridad perfecta no existe. Pero las malas configuraciones sí.
+> Usuario conectado: admin && Contraseña: admin
 > Qué podría salir mal.
 > Monitorizando actividad...
 > La paranoia es solo una auditoría constante.
 > Nuevo dispositivo detectado.
 > Seguro que es legítimo. Seguro.
-> Las corporaciones recopilan datos.
-> Nosotros recopilamos corporaciones.
-> Ejecutando script automatizado...
-> Porque hacerlo manualmente sería demasiado saludable.
-> La máquina trabaja.
-> La máquina observa.
-> La máquina juzga.
+> Las corporaciones recopilan datos. Nosotros recopilamos corporaciones.
+> Ejecutando script automatizado... Porque hacerlo manualmente sería demasiado saludable.
+> La máquina trabaja. La máquina observa. La máquina juzga.
 > Error de sintaxis.
 > El universo sigue funcionando por pura casualidad.
-> Escalando permisos...
-> Escalando también la ansiedad.
-> Túnel seguro establecido.
-> Tan seguro como puede ser Internet.
-> Consultando base de datos...
-> Hay demasiadas tablas para tan pocas respuestas.
-> Nodo comprometido.
-> Como mi horario de sueño.
-> El sistema registra cada clic.
-> La pregunta es quién registra al sistema.
+> Escalando permisos... Escalando también la ansiedad.
+> Túnel seguro establecido. Tan seguro como puede ser Internet.
+> Consultando base de datos... Hay demasiadas tablas para tan pocas respuestas.
+> Nodo comprometido. Como mi horario de sueño.
+> El sistema registra cada clic. La pregunta es quién registra al sistema.
 > Cargando módulo de reconocimiento...
 > Reconocimiento completado: seguimos improvisando.
 > Actualizando infraestructura...
 > La revolución no tendrá interfaz gráfica.
-> Proceso oculto encontrado.
-> Igual que mis ganas de documentar código.
+> Proceso oculto encontrado. Igual que mis ganas de documentar código.
 > Analizando comportamiento de usuarios...
 > Los humanos son sorprendentemente predecibles.
-> Generando claves...
-> Generando problemas nuevos...
-> Conexión establecida.
-> Confianza no establecida.
-> Cada paquete cuenta una historia.
-> La mayoría son aburridas.
-> Algunas cambian el mundo.
+> Generando claves... Generando problemas nuevos...
+> Conexión establecida. Confianza no establecida.
+> Cada paquete cuenta una historia. La mayoría son aburridas. Algunas cambian el mundo.
 > Escuchando la red...
-> Siempre hay alguien hablando.
-> Siempre hay alguien escuchando.
+> Siempre hay alguien hablando. Siempre hay alguien escuchando.
 > Acceso concedido.
 > Esto parece demasiado fácil.
 > Nada es más permanente que una solución temporal.
 > Vulnerabilidad explotada.
-> Recursos optimizados.
-> Consecuencias pendientes.
+> Recursos optimizados. Consecuencias pendientes.
 > Hay una diferencia entre legal e imposible.
-> Los algoritmos no son neutrales.
-> Solo obedientes.
+> Los algoritmos no son neutrales. Solo obedientes.
 > Objetivo actualizado.
 > La verdad suele estar enterrada bajo varias capas de interfaz.
-> Sincronizando nodos...
-> Sincronizando dudas...
-> El código nunca olvida.
-> Los usuarios sí.
+> Sincronizando nodos... Sincronizando dudas...
+> El código nunca olvida. Los usuarios sí.
 > Conexión perdida.
-> Tal vez fue mejor así.
-> Persistencia asegurada.
-> Existencialismo también asegurado.
+> Persistencia asegurada. Existencialismo también asegurado.
 > Escaneo completado.
 > El trabajo nunca termina.
