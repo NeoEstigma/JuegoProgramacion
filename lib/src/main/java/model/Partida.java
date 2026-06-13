@@ -126,7 +126,7 @@ public class Partida {
 			dpPorClick += 5;
 
 			mejoras.setNumPC(mejoras.getNumPC() + 1);
-			mejoras.setPrecioPc(aumentarPrecio(mejoras.getPrecioPc(), 1.12));
+			mejoras.setPrecioPc(aumentarPrecio(mejoras.getPrecioPc(), 1.06));
 
 			return "> PC comprado. +5 DP por clic";
 		}

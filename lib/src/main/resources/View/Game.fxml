@@ -144,7 +144,7 @@
 
                 <Button fx:id="btnRaspberry" maxWidth="Infinity" onAction="#comprarRaspberry">
    				 	 <tooltip>
-        				<Tooltip text="+1 DP por click. Precio +5% con cada compra." />
+        				<Tooltip text="+1 DP por click. Precio +5% por compra." />
     				 </tooltip>
            			 <graphic>
                         <VBox alignment="CENTER_LEFT">
@@ -168,7 +168,7 @@
 
                 <Button fx:id="btnPc" maxWidth="Infinity" onAction="#comprarPc">
                 	<tooltip>
-        				<Tooltip text="+5 DP por click. Precio +12% con cada compra." />
+        				<Tooltip text="+5 DP por click. Precio +6% por compra." />
     				 </tooltip>
                     <graphic>
                         <VBox alignment="CENTER_LEFT">
@@ -216,7 +216,7 @@
 
                 <Button fx:id="btnSenior" maxWidth="Infinity" onAction="#comprarSenior">
                 	<tooltip>
-        				<Tooltip text="+50 DP por click. Precio +10% con cada compra." />
+        				<Tooltip text="+50 DP de forma pasiva. Precio +10% con cada compra." />
     				 </tooltip>
                     <graphic>
                         <VBox alignment="CENTER_LEFT">
