@@ -18,6 +18,7 @@ import model.Partida;
 import model.PartidaDao;
 import model.Ranking;
 import model.RankingDao;
+import model.FrasesDao;
 
 public class GameController {
 
@@ -45,6 +46,7 @@ public class GameController {
 	private Partida partida;
 	private PartidaDao partidaDao = new PartidaDao();
 	private RankingDao rankingDao = new RankingDao();
+	private FrasesDao frasesDao = new FrasesDao();
 	private Timeline produccionPasiva;
 
 	@FXML
@@ -65,14 +67,22 @@ public class GameController {
 	}
 
 	private void iniciarTimeline() {
-		produccionPasiva = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
-			if (partida != null && !partida.estaTerminado()) {
-				partida.tickSegundo();
-				actualizarVista();
-			}
-		}));
-		produccionPasiva.setCycleCount(Timeline.INDEFINITE);
-		produccionPasiva.play();
+	    produccionPasiva = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
+	        if (partida != null && !partida.estaTerminado()) {
+	            partida.tickSegundo();
+	            actualizarVista();
+
+	            // Muestra frase cada 10 segundos si hay producción pasiva
+	            if (partida.getDpSegundo() > 0 && partida.getTiempoPartida() % 10 == 0) {
+	                String frase = frasesDao.getFraseAleatoria();
+	                if (!frase.isEmpty()) {
+	                    terminalArea.appendText(frase + "\n");
+	                }
+	            }
+	        }
+	    }));
+	    produccionPasiva.setCycleCount(Timeline.INDEFINITE);
+	    produccionPasiva.play();
 	}
 
 	@FXML
