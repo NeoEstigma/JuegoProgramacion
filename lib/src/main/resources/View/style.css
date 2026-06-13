@@ -47,6 +47,9 @@
     -fx-background-color: #00ff66;
     -fx-text-fill: black;
 }
+.button:hover .label {
+    -fx-text-fill: black;
+}
 
 .button:pressed {
     -fx-background-color: #009933;
