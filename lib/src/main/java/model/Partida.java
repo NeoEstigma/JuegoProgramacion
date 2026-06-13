@@ -1,11 +1,6 @@
 package model;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.Date;
-import java.util.Random;
 
 public class Partida {
 
@@ -317,31 +312,6 @@ public class Partida {
 		} else {
 			this.nivel = nivel;
 		}
-	}
-
-	public String obtenerFrases() {
-
-		Random random = new Random();
-		String lineaSeleccionada = null;
-		int contador = 0;
-
-		try (BufferedReader br = new BufferedReader(new FileReader("./lib/src/main/resources/documents/texto.txt"))) {
-			String linea;
-
-			while ((linea = br.readLine()) != null) {
-				contador++;
-
-				if (random.nextInt(contador) == 0) {
-					lineaSeleccionada = linea;
-				}
-			}
-		} catch (FileNotFoundException e) {
-			System.out.println("Archivo no encontrado");
-		} catch (IOException e) {
-			System.out.println("No se ha podido leer el archivo");
-		}
-
-		return lineaSeleccionada;
 	}
 
 	public void setTerminado(boolean terminado) {
