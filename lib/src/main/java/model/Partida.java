@@ -226,11 +226,6 @@ public class Partida {
 
 			nivel++;
 
-			if (nivel == NIVEL_MAXIMO) {
-				terminado = true;
-				return "FIN";
-			}
-
 			progresoMaximo = aumentarPrecio(progresoMaximo, 2.2);
 
 			return "> Nuevo rango desbloqueado: " + getNombreNivel();
