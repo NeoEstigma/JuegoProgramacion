@@ -18,6 +18,14 @@
     -fx-text-fill: #66ff99;
 }
 
+.terminal-title {
+    -fx-text-fill: #00ff66;
+    -fx-font-weight: bold;
+	-fx-font-style: italic;
+    -fx-font-size: 39px;
+    -fx-effect: dropshadow(gaussian, #00ff66, 6, 0.3, 0, 0);
+}
+
 /* ===== LABELS ===== */
 
 .label {

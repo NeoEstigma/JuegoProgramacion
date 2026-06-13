@@ -21,7 +21,7 @@
             <HBox alignment="CENTER_LEFT" spacing="10">
 
                 <VBox prefHeight="69.0" prefWidth="413.0" spacing="0">
-                    <Label fx:id="lblTitulo" prefHeight="41.0" prefWidth="407.0" styleClass="app-title" text="TERMINAL CLICKER">
+                    <Label fx:id="lblTitulo" prefHeight="41.0" prefWidth="600.0" styleClass="terminal-title" text="TERMINAL CLICKER">
                   <VBox.margin>
                      <Insets top="10.0" />
                   </VBox.margin>
