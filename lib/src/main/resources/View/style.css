@@ -271,3 +271,30 @@
 .hbox {
     -fx-background-color: transparent;
 }
+
+/* ===== BOTON HACK ===== */
+
+.hack-button {
+    -fx-background-color: #101010;
+    -fx-border-color: #00ff66;
+    -fx-border-width: 2;
+    -fx-cursor: hand;
+}
+
+.hack-button:hover {
+    -fx-background-color: #101010;
+    -fx-effect: dropshadow(gaussian, #00ff66, 15, 0.5, 0, 0);
+}
+
+.hack-button:pressed {
+    -fx-background-color: #101010;
+    -fx-effect: dropshadow(gaussian, #00ff66, 18, 0.7, 0, 0);
+}
+
+.hack-button .label {
+    -fx-text-fill: #00ff66;
+}
+
+.hack-button:hover .label {
+    -fx-text-fill: #00ff66;
+}
