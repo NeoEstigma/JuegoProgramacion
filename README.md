@@ -198,7 +198,7 @@ Almacena resultados de partidas. Puede tener múltiples documentos.
 | P04 | Finalización | Completar una partida | Se muestra el resultado final | Correcto |
 | P05 | Guardado de datos | Presionar el botón de guardar | Se guarda la información correspondiente | Correcto |
 | P06 | Carga de datos | Abrir ranking, o continuar partida | Se muestran los datos guardados | Correcto |
-| P07 | Continuar partida inexistente | Presionar el botón de continuar sin que exista una pertida | El botón aparece bloqueado | Correcto |
+| P07 | Continuar partida inexistente | Presionar el botón de continuar sin que exista una partida | El botón aparece bloqueado | Correcto |
 
 ---
 
