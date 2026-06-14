@@ -9,6 +9,16 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+/**
+ * Clase principal de la aplicación Terminal Clicker.
+ * Extiende {@link Application} de JavaFX y actúa como punto de entrada
+ * de la interfaz gráfica. Se encarga de cargar la vista inicial del menú,
+ * aplicar el CSS y configurar la ventana principal.
+ *
+ * @author Mateo, Diego, Laura
+ */
+
+
 public class Main extends Application {
 
     @Override
@@ -58,6 +68,13 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
+    
+    /**
+     * Punto de entrada principal de la aplicación.
+     * Llama a {@link Application#launch(String...)} para iniciar JavaFX.
+     *
+     * @param args argumentos de línea de comandos 
+     */
 
     public static void main(String[] args) {
         launch(args);
