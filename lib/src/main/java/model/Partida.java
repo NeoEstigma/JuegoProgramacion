@@ -190,7 +190,7 @@ public class Partida {
      */
 	public String comprarRaspberry() {
 		if (terminado) {
-			return null;
+			return "Has ganado el juego, esta acción ya no se puede realizar";
 		}
 
 		if (dp >= mejoras.getPrecioRaspberry()) {
@@ -214,7 +214,7 @@ public class Partida {
      */
 	public String comprarPc() {
 		if (terminado) {
-			return null;
+			return "Has ganado el juego, esta acción ya no se puede realizar";
 		}
 
 		if (dp >= mejoras.getPrecioPc()) {
@@ -238,7 +238,7 @@ public class Partida {
      */
 	public String comprarJunior() {
 		if (terminado) {
-			return null;
+			return "Has ganado el juego, esta acción ya no se puede realizar";
 		}
 
 		if (dp >= mejoras.getPrecioJunior()) {
@@ -262,7 +262,7 @@ public class Partida {
      */
 	public String comprarSenior() {
 		if (terminado) {
-			return null;
+			return "Has ganado el juego, esta acción ya no se puede realizar";
 		}
 
 		if (dp >= mejoras.getPrecioSenior()) {
@@ -286,7 +286,7 @@ public class Partida {
      */
 	public String comprarCafe() {
 		if (terminado) {
-			return null;
+			return "Has ganado el juego, esta acción ya no se puede realizar";
 		}
 
 		if (dp >= mejoras.getPrecioCafe()) {
@@ -312,7 +312,7 @@ public class Partida {
      */
 	public String comprarRgbs() {
 		if (terminado) {
-			return null;
+			return "Has ganado el juego, esta acción ya no se puede realizar";
 		}
 
 		if (dp >= mejoras.getPrecioRgbs()) {
@@ -339,7 +339,7 @@ public class Partida {
      */
 	public String avanzarProgreso() {
 		if (terminado) {
-			return null;
+			return "Has ganado el juego, esta acción ya no se puede realizar";
 		}
 
 		if (dp >= progresoMaximo) {
