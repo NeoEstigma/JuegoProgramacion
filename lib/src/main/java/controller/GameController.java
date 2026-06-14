@@ -86,7 +86,7 @@ public class GameController {
 		lblOperador.setText(partida.getJugador());
 		terminalArea.appendText("Sistema iniciado...\n");
 		terminalArea.appendText("> Operador: " + partida.getJugador() + "\n");
-		terminalArea.appendText("> Rango actual: " + partida.getNombreNivel() + "\n");
+		terminalArea.appendText("> Nivel actual: " + partida.getNombreNivel() + "\n");
 		actualizarVista();
 	}
 	
