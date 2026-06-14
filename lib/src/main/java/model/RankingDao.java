@@ -10,15 +10,40 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Sorts;
 
+
+/**
+ * DAO encargado de gestionar las operaciones de persistencia
+ * relacionadas con el ranking de jugadores.
+ *
+ * Permite almacenar, actualizar, eliminar y recuperar registros
+ * del ranking desde MongoDB, así como obtener las mejores
+ * puntuaciones ordenadas por el filtro elegido.
+ *
+ * Implementa la conversión entre objetos Ranking y documentos BSON.
+ *
+ * @author Laura
+ */
 public class RankingDao {
 
+	/**
+	 * Colección MongoDB donde se almacenan los registros del ranking.
+	 */
 	private MongoCollection<Document> coleccion;
 
+	/**
+	 * Inicializa la conexión con MongoDB y obtiene la colección
+	 * utilizada para almacenar el ranking de jugadores.
+	 */
 	public RankingDao() {
 		MongoDatabase db = Conexion.getDatabase();
 		this.coleccion = db.getCollection("ranking");
 	}
 
+	/**
+	 * Inserta un nuevo registro en el ranking.
+	 *
+	 * @param ranking Información del jugador que se desea almacenar.
+	 */
 	public void insertar(Ranking ranking) {
 		if (ranking == null) {
 			return;
@@ -28,10 +53,21 @@ public class RankingDao {
 		coleccion.insertOne(doc);
 	}
 
+	/**
+	 * Elimina todos los registros almacenados en el ranking.
+	 *
+	 * Puede utilizarse para reiniciar completamente la clasificación.
+	 */
 	public void eliminarTodo() {
 		coleccion.deleteMany(new Document());
 	}
 
+	/**
+	 * Guarda un jugador en el ranking o actualiza sus datos
+	 * si ya existe un registro asociado al mismo nombre.
+	 *
+	 * @param ranking Datos del jugador.
+	 */
 	public void guardarOActualizar(Ranking ranking) {
 		if (ranking == null) {
 			return;
@@ -42,6 +78,12 @@ public class RankingDao {
 				new com.mongodb.client.model.ReplaceOptions().upsert(true));
 	}
 
+	/**
+	 * Obtiene los diez mejores jugadores ordenados
+	 * de mayor a menor cantidad de Data Points.
+	 *
+	 * @return Lista con los diez primeros clasificados.
+	 */
 	public List<Ranking> obtenerTop10() {
 		List<Ranking> lista = new ArrayList<>();
 
@@ -51,6 +93,12 @@ public class RankingDao {
 		return lista;
 	}
 
+	/**
+	 * Recupera todos los registros almacenados en el ranking,
+	 * ordenados descendentemente según los Data Points obtenidos.
+	 *
+	 * @return Lista completa del ranking.
+	 */
 	public List<Ranking> obtenerTodos() {
 		List<Ranking> lista = new ArrayList<>();
 
@@ -59,6 +107,16 @@ public class RankingDao {
 		return lista;
 	}
 
+	/**
+	 * Convierte un objeto Ranking en un documento BSON
+	 * para su almacenamiento en MongoDB.
+	 *
+	 * También serializa la información de las mejoras
+	 * adquiridas por el jugador.
+	 *
+	 * @param r Registro del ranking.
+	 * @return Documento MongoDB equivalente.
+	 */
 	private Document rankingToDocument(Ranking r) {
 		Mejoras m = r.getMejoras();
 
@@ -75,6 +133,17 @@ public class RankingDao {
 				.append("fechaInicio", r.getFechaInicio() != null ? r.getFechaInicio() : new Date());
 	}
 
+	
+	/**
+	 * Reconstruye un objeto Ranking a partir de un documento
+	 * recuperado de MongoDB.
+	 *
+	 * Este método restaura los datos del jugador, las mejoras
+	 * adquiridas, el tiempo de partida y la fecha de inicio.
+	 *
+	 * @param doc Documento BSON obtenido de la base de datos.
+	 * @return Objeto Ranking reconstruido.
+	 */
 	private Ranking documentToRanking(Document doc) {
 		Document mejDoc = doc.get("mejoras", Document.class);
 
@@ -101,6 +170,18 @@ public class RankingDao {
 		return ranking;
 	}
 
+	/**
+	 * Recupera un valor numérico de tipo long de forma segura.
+	 *
+	 * Permite leer valores almacenados como Integer, Long o Double,
+	 * evitando errores de conversión al reconstruir los datos
+	 * procedentes de MongoDB.
+	 *
+	 * @param doc Documento que contiene el campo.
+	 * @param campo Nombre del campo.
+	 * @param valorDefecto Valor alternativo si no existe un número válido.
+	 * @return Valor convertido a long o el valor por defecto.
+	 */
 	private long getLongSeguro(Document doc, String campo, long valorDefecto) {
 		Object valor = doc.get(campo);
 
@@ -119,6 +200,18 @@ public class RankingDao {
 		return valorDefecto;
 	}
 
+	/**
+	 * Recupera un valor numérico de tipo int de forma segura.
+	 *
+	 * Se utiliza para garantizar la compatibilidad con distintos
+	 * tipos numéricos almacenados en MongoDB.
+	 *
+	 * @param doc Documento que contiene el campo.
+	 * @param campo Nombre del campo.
+	 * @param valorDefecto Valor alternativo si el campo no existe
+	 *                     o no contiene un número válido.
+	 * @return Valor convertido a entero o el valor por defecto.
+	 */
 	private int getIntegerSeguro(Document doc, String campo, int valorDefecto) {
 		Object valor = doc.get(campo);
 

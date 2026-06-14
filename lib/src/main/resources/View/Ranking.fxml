@@ -8,6 +8,20 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
+/**
+ * Vista encargada de mostrar el ranking global de jugadores.
+ *
+ * Presenta una tabla con las estadísticas de todas las partidas
+ * registradas en la base de datos, incluyendo información sobre
+ * el progreso alcanzado, mejoras adquiridas, tiempo de juego y
+ * fecha de inicio.
+ *
+ * La gestión de eventos y la carga de datos son realizadas por
+ * la clase RankingController.
+ *
+ * @author Diego
+ */
+
 <AnchorPane xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="controller.RankingController"
