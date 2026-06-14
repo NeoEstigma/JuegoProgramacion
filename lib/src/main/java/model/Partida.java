@@ -175,7 +175,7 @@ public class Partida {
      */
 	public String click() {
 		if (terminado) {
-			return null;
+			return "Has ganado el juego, esta acción ya no se puede realizar";
 		}
 
 		dp += dpPorClick;
