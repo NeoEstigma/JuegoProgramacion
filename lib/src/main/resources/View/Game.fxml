@@ -15,17 +15,7 @@
 <?import javafx.scene.control.Tooltip?>
 
 
-/**
- * Vista principal del juego Terminal Clicker.
 
- *
- * La ventana está dividida en tres zonas principales:
- * - Panel superior: información del jugador y menú.
- * - Panel central: terminal y botón de hackeo.
- * - Panel lateral: mejoras y sistema de progresión.
- *
- * @author Diego
- */
  
 <BorderPane prefHeight="750" prefWidth="1200" stylesheets="@style.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GameController">
 
