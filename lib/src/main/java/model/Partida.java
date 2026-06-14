@@ -50,8 +50,8 @@ public class Partida {
 
     /** Nombres de cada nivel de acceso. */
     private static final String[] NOMBRES_NIVELES = {
-        "Nivel 1: Script Kiddie", "Nivel 2: Pen Tester", "Nivel 3: Operador Encubierto",
-        "Nivel 4: Especialista en Intrusion", "Nivel 5: Maestro del Backdoor"
+        "1: Script Kiddie", "2: Pen Tester", "3: Operador Encubierto",
+        "4: Especialista en Intrusion", "5: Maestro del Backdoor"
     };
 
     /*
