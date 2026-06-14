@@ -13,7 +13,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -63,14 +62,14 @@ public class RankingController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-	    listaRanking = FXCollections.observableArrayList();
+		listaRanking = FXCollections.observableArrayList();
 
-	    tablaRanking.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+		tablaRanking.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-	    colPosicion.setCellValueFactory(
-	            cell -> new SimpleIntegerProperty(tablaRanking.getItems().indexOf(cell.getValue()) + 1));
+		colPosicion.setCellValueFactory(
+				cell -> new SimpleIntegerProperty(tablaRanking.getItems().indexOf(cell.getValue()) + 1));
 
-	    // resto de tu código igual...
+		// resto de tu código igual...
 
 		colJugador.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getJugador()));
 
@@ -123,49 +122,48 @@ public class RankingController implements Initializable {
 		List<Ranking> datos = rankingDao.obtenerTodos();
 		listaRanking.addAll(datos);
 	}
+
 	@FXML
 	private void eliminarRanking() {
 
-	    Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
+		Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
 
-	    alerta.setTitle("Eliminar ranking");
-	    alerta.setHeaderText(null);
-	    alerta.setContentText(
-	            "¿Seguro que quieres eliminar todo el ranking? Esta acción no se puede deshacer.");
+		alerta.setTitle("Eliminar ranking");
+		alerta.setHeaderText(null);
+		alerta.setContentText("¿Seguro que quieres eliminar todo el ranking? Esta acción no se puede deshacer.");
 
-	    alerta.setGraphic(null);
-	    alerta.getDialogPane().setGraphic(null);
+		alerta.setGraphic(null);
+		alerta.getDialogPane().setGraphic(null);
 
-	    alerta.getDialogPane().getStylesheets()
-	            .add(getClass().getResource("/View/style.css").toExternalForm());
+		alerta.getDialogPane().getStylesheets().add(getClass().getResource("/View/style.css").toExternalForm());
 
-	    alerta.getDialogPane().getStyleClass().add("terminal-dialog");
+		alerta.getDialogPane().getStyleClass().add("terminal-dialog");
 
-	    alerta.showAndWait().ifPresent(respuesta -> {
+		alerta.showAndWait().ifPresent(respuesta -> {
 
-	        if (respuesta == ButtonType.OK) {
+			if (respuesta == ButtonType.OK) {
 
-	            RankingDao rankingDao = new RankingDao();
-	            rankingDao.eliminarTodo();
+				RankingDao rankingDao = new RankingDao();
+				rankingDao.eliminarTodo();
 
-	            listaRanking.clear();
-	            tablaRanking.refresh();
-	        }
-	    });
+				listaRanking.clear();
+				tablaRanking.refresh();
+			}
+		});
 	}
 
 	@FXML
 	private void volver() {
-	    try {
-	        Parent root = FXMLLoader.load(getClass().getResource("/View/Menu.fxml"));
+		try {
+			Parent root = FXMLLoader.load(getClass().getResource("/View/Menu.fxml"));
 
-	        Stage stage = (Stage) btnVolver.getScene().getWindow();
+			Stage stage = (Stage) btnVolver.getScene().getWindow();
 
-	        stage.getScene().setRoot(root);
-	        stage.setMaximized(true);
+			stage.getScene().setRoot(root);
+			stage.setMaximized(true);
 
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
