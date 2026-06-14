@@ -193,10 +193,12 @@ Almacena resultados de partidas. Puede tener múltiples documentos.
 | Código | Prueba | Acción realizada | Resultado esperado | Resultado obtenido |
 |---|---|---|---|---|
 | P01 | Inicio de aplicación | Ejecutar el proyecto | Se abre el menú principal | Correcto |
-| P02 | Inicio de partida | Pulsar el botón de inicio | Se carga la pantalla de juego | Correcto |
-| P03 | Finalización | Completar una partida | Se muestra el resultado final | Correcto |
-| P04 | Guardado de datos | Finalizar una partida | Se guarda la información correspondiente | Correcto |
-| P05 | Carga de datos | Abrir ranking, historial o partida guardada | Se muestran los datos guardados | Correcto |
+| P02 | Inicio de partida | Pulsar el botón de nueva partida | Se carga la pantalla de juego | Correcto |
+| P03 | Continuar partida | presionar el botón de continuar | Se carga la pantalla de juego | Correcto |
+| P04 | Finalización | Completar una partida | Se muestra el resultado final | Correcto |
+| P05 | Guardado de datos | Presionar el botón de guardar | Se guarda la información correspondiente | Correcto |
+| P06 | Carga de datos | Abrir ranking, o continuar partida | Se muestran los datos guardados | Correcto |
+| P07 | Continuar partida inexistente | Presionar el botón de continuar sin que exista una pertida | El botón aparece bloqueado | Correcto |
 
 ---
 
