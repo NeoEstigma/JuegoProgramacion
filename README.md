@@ -188,6 +188,18 @@ Almacena resultados de partidas. Puede tener múltiples documentos.
 
 ---
 
+## Tabla de pruebas
+
+| Código | Prueba | Acción realizada | Resultado esperado | Resultado obtenido |
+|---|---|---|---|---|
+| P01 | Inicio de aplicación | Ejecutar el proyecto | Se abre el menú principal | Correcto |
+| P02 | Inicio de partida | Pulsar el botón de inicio | Se carga la pantalla de juego | Correcto |
+| P03 | Finalización | Completar una partida | Se muestra el resultado final | Correcto |
+| P04 | Guardado de datos | Finalizar una partida | Se guarda la información correspondiente | Correcto |
+| P05 | Carga de datos | Abrir ranking, historial o partida guardada | Se muestran los datos guardados | Correcto |
+
+---
+
 ## Problemas encontrados
 
 - **Permisión de continuación de partida ganada:** al ganar una partida el botón continuar no se desactibaba, lo cual permitía volver a una partida en la que no tienes posibilidad de acción. Se solucionó eliminando la partida ganada con `eliminarUnica()` y cambiando la vista al menú con `volverAlMenu()`.
