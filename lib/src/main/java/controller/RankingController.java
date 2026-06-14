@@ -23,7 +23,16 @@ import model.Mejoras;
 import model.Ranking;
 import model.RankingDao;
 
-public class RankingController implements Initializable {
+/**
+ * Controlador de la pantalla de ranking de Terminal Clicker.
+ * Muestra una tabla con los resultados de todas las partidas guardadas
+ * en la colección ranking de MongoDB, ordenadas por Data Points de mayor a menor.
+ * Permite actualizar, eliminar el ranking y volver al menú principal.
+ *
+ * @author Mateo, Diego, Laura
+ */
+
+public class RankingController {
 
 	@FXML
 	private TableView<Ranking> tablaRanking;
@@ -58,18 +67,26 @@ public class RankingController implements Initializable {
 	@FXML
 	private Button btnEliminar;
 
+	/** Lista observable que alimenta la tabla de ranking. */
 	private ObservableList<Ranking> listaRanking;
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
+	
+	/**
+     * Método de inicialización llamado automáticamente por JavaFX al cargar la vista.
+     * Configura las columnas de la tabla asignando los valores de cada campo
+     * del objeto {@link Ranking}. Protege contra null en las columnas de mejoras
+     * para evitar errores si el documento de MongoDB no tiene ese campo.
+     * Carga los datos del ranking al terminar la configuración.
+     */
+	
+	@FXML
+	public void initialize() {
 		listaRanking = FXCollections.observableArrayList();
 
 		tablaRanking.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
 		colPosicion.setCellValueFactory(
 				cell -> new SimpleIntegerProperty(tablaRanking.getItems().indexOf(cell.getValue()) + 1));
-
-		// resto de tu código igual...
 
 		colJugador.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getJugador()));
 
@@ -114,6 +131,11 @@ public class RankingController implements Initializable {
 		tablaRanking.setItems(listaRanking);
 		actualizarRanking();
 	}
+	
+	/**
+     * Recarga los datos del ranking desde MongoDB y los muestra en la tabla.
+     * Limpia la lista actual antes de añadir los nuevos datos.
+     */
 
 	@FXML
 	private void actualizarRanking() {
@@ -122,6 +144,12 @@ public class RankingController implements Initializable {
 		List<Ranking> datos = rankingDao.obtenerTodos();
 		listaRanking.addAll(datos);
 	}
+	
+	/**
+     * Muestra un diálogo de confirmación antes de eliminar todo el ranking.
+     * Si el usuario confirma, borra todos los documentos de la colección
+     * ranking en MongoDB y limpia la tabla.
+     */
 
 	@FXML
 	private void eliminarRanking() {
@@ -151,6 +179,10 @@ public class RankingController implements Initializable {
 			}
 		});
 	}
+	
+	/**
+     * Vuelve al menú principal cargando la vista Menu.fxml.
+     */
 
 	@FXML
 	private void volver() {

@@ -14,13 +14,30 @@ import javafx.stage.Stage;
 import model.Partida;
 import model.PartidaDao;
 
+/**
+ * Controlador del menú principal de Terminal Clicker.
+ * Gestiona la navegación hacia las distintas pantallas del juego:
+ * nueva partida, continuar partida guardada, ranking y salir.
+ * Utiliza {@link PartidaDao} para comprobar si existe una partida guardada
+ * y {@link Partida} para establecer el singleton antes de cargar el juego.
+ *
+ * @author Mateo, Diego, Laura
+ */
+
+
 public class MenuController {
 
 	@FXML
 	private Button btnContinuar;
-
+	/** DAO para acceder a la partida guardada en MongoDB. */
 	private PartidaDao partidaDao = new PartidaDao();
 
+	/**
+     * Método de inicialización llamado automáticamente por JavaFX al cargar la vista.
+     * Comprueba si existe una partida guardada en MongoDB. Si la partida está
+     * terminada la elimina. Desactiva el botón continuar si no hay partida disponible.
+     */
+	
 	@FXML
 	public void initialize() {
 		Partida guardada = partidaDao.cargarUnica();
@@ -32,6 +49,12 @@ public class MenuController {
 
 		btnContinuar.setDisable(guardada == null);
 	}
+	
+	/**
+     * Carga la partida guardada desde MongoDB y navega a la pantalla de juego.
+     * Recalcula los precios de las mejoras según las compras realizadas antes
+     * de establecer la partida como instancia activa del singleton.
+     */
 
 	@FXML
 	private void continuarPartida() {
@@ -43,6 +66,12 @@ public class MenuController {
 			cargarVista("/View/Game.fxml");
 		}
 	}
+	
+	/**
+     * Muestra un diálogo para introducir el nombre del operador e inicia
+     * una nueva partida. Si ya existe una partida guardada, la elimina antes
+     * de crear la nueva. Navega a la pantalla de juego al confirmar.
+     */
 
 	@FXML
 	private void nuevaPartida() {
@@ -70,17 +99,32 @@ public class MenuController {
 			}
 		});
 	}
+	
+	/**
+     * Navega a la pantalla de ranking.
+     */
 
 	@FXML
 	private void mostrarRanking() {
 		cargarVista("/View/Ranking.fxml");
 	}
+	
+	/**
+     * Cierra la aplicación.
+     */
 
 	@FXML
 	private void salir() {
 		Stage stage = (Stage) btnContinuar.getScene().getWindow();
 		stage.close();
 	}
+	
+	/**
+     * Carga una vista FXML y la establece como escena principal.
+     * Aplica el CSS externo y maximiza la ventana.
+     *
+     * @param ruta ruta del fichero FXML a cargar, relativa a los recursos.
+     */
 
 	private void cargarVista(String ruta) {
 		try {
