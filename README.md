@@ -207,6 +207,7 @@ Almacena resultados de partidas. Puede tener múltiples documentos.
 - **Permisión de continuación de partida ganada:** al ganar una partida el botón continuar no se desactibaba, lo cual permitía volver a una partida en la que no tienes posibilidad de acción. Se solucionó eliminando la partida ganada con `eliminarUnica()` y cambiando la vista al menú con `volverAlMenu()`.
 - **`initialize()` no se relanzaba al navegar:** al cambiar de vista con `setRoot()`, el controlador no se reiniciaba. Se solucionó usando `stage.setScene(new Scene(...))` en lugar de `setRoot()`.
 - **Condición de victoria duplicada:** el nivel máximo se detectaba dos veces en `avanzarProgreso()`, impidiendo que el jugador jugara el nivel 5. Se eliminó la comprobación redundante.
+- **Al finalizar partida cada acción muestra null en terminal** al ganar la partida los botones se desactivan, pero en lugar de simplemente dejar de funcionar devolvían un null. La solución fue cambiar null por un mensaje personalizado.
 
 ---
 
@@ -215,4 +216,6 @@ Almacena resultados de partidas. Puede tener múltiples documentos.
 - Añadir más niveles y mejoras con efectos distintos
 - Añadir multiplicadores de clic como mejoras independientes
 - Mostrar animaciones al subir de nivel
-- Añadir sonido ambiental de terminal
+- Aumentar repertorio de frases para la terminal
+- Hacer que las frases vayan acorde con las acciones del jugador
+- Añadir eventos aleatorios como huelgas de trabajadores

@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-
 import java.net.URL;
 
 import javafx.animation.KeyFrame;
@@ -14,6 +13,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.FrasesDao;
@@ -22,12 +22,11 @@ import model.PartidaDao;
 import model.Ranking;
 import model.RankingDao;
 
-
 /**
- * Controlador principal de la pantalla de juego de Terminal Clicker.
- * Gestiona la interacción del usuario con el juego: clics, compra de mejoras,
- * avance de nivel, guardado de partida y navegación de vuelta al menú.
- * Obtiene la partida activa a través del patrón singleton de {@link Partida}.
+ * Controlador principal de la pantalla de juego de Terminal Clicker. Gestiona
+ * la interacción del usuario con el juego: clics, compra de mejoras, avance de
+ * nivel, guardado de partida y navegación de vuelta al menú. Obtiene la partida
+ * activa a través del patrón singleton de {@link Partida}.
  *
  * @author Diego, Mateo, Laura
  */
@@ -54,8 +53,7 @@ public class GameController {
 	private TextArea terminalArea;
 	@FXML
 	private ProgressBar nodoBarra;
-	
-	
+
 	/** Partida activa obtenida del singleton. */
 	private Partida partida;
 	/** DAO para guardar y cargar la partida en curso en MongoDB. */
@@ -66,12 +64,12 @@ public class GameController {
 	private FrasesDao frasesDao = new FrasesDao();
 	/** Timeline que gestiona la producción pasiva de DP por segundo. */
 	private Timeline produccionPasiva;
-	
+
 	/**
-     * Método de inicialización llamado automáticamente por JavaFX al cargar la vista.
-     * Obtiene la instancia de partida del singleton, inicia el timeline de producción
-     * pasiva y actualiza la vista con el estado inicial.
-     */
+	 * Método de inicialización llamado automáticamente por JavaFX al cargar la
+	 * vista. Obtiene la instancia de partida del singleton, inicia el timeline de
+	 * producción pasiva y actualiza la vista con el estado inicial.
+	 */
 
 	@FXML
 	public void initialize() {
@@ -89,13 +87,13 @@ public class GameController {
 		terminalArea.appendText("> Nivel actual: " + partida.getNombreNivel() + "\n");
 		actualizarVista();
 	}
-	
+
 	/**
-     * Inicia el timeline de producción pasiva llamando a tickSegundo().
-     * Se ejecuta cada segundo y acumula los DP generados por la producción pasiva de las mejoras correspondientes.
-     * Cada 10 segundos, si hay producción pasiva activa, muestra una frase
-     * aleatoria en el terminal.
-     */
+	 * Inicia el timeline de producción pasiva llamando a tickSegundo(). Se ejecuta
+	 * cada segundo y acumula los DP generados por la producción pasiva de las
+	 * mejoras correspondientes. Cada 10 segundos, si hay producción pasiva activa,
+	 * muestra una frase aleatoria en el terminal.
+	 */
 
 	private void iniciarTimeline() {
 		produccionPasiva = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
@@ -111,146 +109,139 @@ public class GameController {
 				}
 			}
 		}));
-		
+
 		produccionPasiva.setCycleCount(Timeline.INDEFINITE);
 		produccionPasiva.play();
 	}
-	
-	 /**
-     * Ejecuta un comando al pulsar el botón de hackear.
-     * Suma los DP por clic al total acumulado y registra la acción en el terminal.
-     * Reproduce sonido de click al clicar
-     */
+
+	/**
+	 * Ejecuta un comando al pulsar el botón de hackear. Suma los DP por clic al
+	 * total acumulado y registra la acción en el terminal. Reproduce sonido de
+	 * click al clicar
+	 */
 
 	@FXML
 	private void clickHack() {
-	    SoundController.playClick();
+		SoundController.playClick();
 
-	    String msg = partida.click();
-	    if (msg != null) {
-	        terminalArea.appendText(msg + "\n");
-	    }
-	    actualizarVista();
+		String msg = partida.click();
+		if (msg != null) {
+			terminalArea.appendText(msg + "\n");
+		}
+		actualizarVista();
 	}
-	
+
 	/**
-     * Compra la mejora Raspberry si hay suficientes DP y reproduce sonido.
-     * Aumenta los DP por clic en 1.
-     */
+	 * Compra la mejora Raspberry si hay suficientes DP y reproduce sonido. Aumenta
+	 * los DP por clic en 1.
+	 */
 
 	@FXML
 	private void comprarRaspberry() {
-		
 
-	    terminalArea.appendText(partida.comprarRaspberry() + "\n");
-	    actualizarVista();
+		terminalArea.appendText(partida.comprarRaspberry() + "\n");
+		actualizarVista();
 	}
 
 	/**
-     * Compra la mejora PC si hay suficientes DP y reproduce sonido.
-     * Aumenta los DP por clic en 5.
-     */
-	
+	 * Compra la mejora PC si hay suficientes DP y reproduce sonido. Aumenta los DP
+	 * por clic en 5.
+	 */
+
 	@FXML
 	private void comprarPc() {
-		 
 
-	    terminalArea.appendText(partida.comprarPc() + "\n");
-	    actualizarVista();
+		terminalArea.appendText(partida.comprarPc() + "\n");
+		actualizarVista();
 	}
-	
+
 	/**
-     * Compra la mejora Junior si hay suficientes DP y reproduce sonido.
-     * Aumenta la producción pasiva en 10 DP/s.
-     */
+	 * Compra la mejora Junior si hay suficientes DP y reproduce sonido. Aumenta la
+	 * producción pasiva en 10 DP/s.
+	 */
 	@FXML
 	private void comprarJunior() {
-		
 
-	    terminalArea.appendText(partida.comprarJunior() + "\n");
-	    actualizarVista();
+		terminalArea.appendText(partida.comprarJunior() + "\n");
+		actualizarVista();
 	}
-	
+
 	/**
-     * Compra la mejora Senior si hay suficientes DP y reproduce sonido.
-     * Aumenta la producción pasiva en 50 DP/s.
-     */
+	 * Compra la mejora Senior si hay suficientes DP y reproduce sonido. Aumenta la
+	 * producción pasiva en 50 DP/s.
+	 */
 
 	@FXML
 	private void comprarSenior() {
-	
 
-	    terminalArea.appendText(partida.comprarSenior() + "\n");
-	    actualizarVista();
+		terminalArea.appendText(partida.comprarSenior() + "\n");
+		actualizarVista();
 	}
-	
+
 	/**
-     * Compra la mejora Máquina de Café si hay suficientes DP y reproduce sonido.
-     * Aumenta la producción de Junior y Senior en un 3%.
-     */
+	 * Compra la mejora Máquina de Café si hay suficientes DP y reproduce sonido.
+	 * Aumenta la producción de Junior y Senior en un 3%.
+	 */
 
 	@FXML
 	private void comprarCafe() {
-		
 
-	    terminalArea.appendText(partida.comprarCafe() + "\n");
-	    actualizarVista();
+		terminalArea.appendText(partida.comprarCafe() + "\n");
+		actualizarVista();
 	}
-	
+
 	/**
-     * Compra la mejora RGBS si hay suficientes DP y reproduce sonido.
-     * Aumenta la producción de Junior y Senior en un 10%.
-     */
+	 * Compra la mejora RGBS si hay suficientes DP y reproduce sonido. Aumenta la
+	 * producción de Junior y Senior en un 10%.
+	 */
 
 	@FXML
 	private void comprarRgbs() {
-		 
 
-	    terminalArea.appendText(partida.comprarRgbs() + "\n");
-	    actualizarVista();
+		terminalArea.appendText(partida.comprarRgbs() + "\n");
+		actualizarVista();
 	}
-	
+
 	/**
-     * Intenta avanzar al siguiente nivel de acceso.
-     * Cuando valida que se puede pasar de nivel reproduce sonido.
-     * Guarda el estado en el ranking antes de avanzar.
-     * Si se alcanza el nivel máximo, finaliza el juego llamando al método terminarJuego.
-     */
+	 * Intenta avanzar al siguiente nivel de acceso. Cuando valida que se puede
+	 * pasar de nivel reproduce sonido. Guarda el estado en el ranking antes de
+	 * avanzar. Si se alcanza el nivel máximo, finaliza el juego llamando al método
+	 * terminarJuego.
+	 */
 	@FXML
 	private void avanzarProgreso() {
-		
-	    guardarEnRanking();
-	    
-	    String msg = partida.avanzarProgreso();
 
-	    if ("FIN".equals(msg)) {
-	        terminarJuego();
-	        
-	    } else {
-	        terminalArea.appendText(msg + "\n");
-	    }
+		guardarEnRanking();
 
-	    actualizarVista();
-	    
+		String msg = partida.avanzarProgreso();
+
+		if ("FIN".equals(msg)) {
+			terminarJuego();
+
+		} else {
+			terminalArea.appendText(msg + "\n");
+		}
+
+		actualizarVista();
+
 	}
-	
+
 	/**
-     * Guarda o actualiza el resultado de la partida actual en la colección
-     * de ranking de MongoDB mediante upsert por nombre de jugador.
-     */
+	 * Guarda o actualiza el resultado de la partida actual en la colección de
+	 * ranking de MongoDB mediante upsert por nombre de jugador.
+	 */
 
 	private void guardarEnRanking() {
 		Ranking resultado = new Ranking(partida.getJugador(), partida.getDp(), partida.getNivel(), partida.getMejoras(),
 				partida.getTiempoPartida(), partida.getFechaInicio());
 		rankingDao.guardarOActualizar(resultado);
 	}
-	
+
 	/**
-     * Finaliza el juego al alcanzar el nivel máximo.
-     * Detiene la producción pasiva, muestra el mensaje de victoria,
-     * guarda la partida y el ranking, y lanza una cuenta atrás de 5 segundos
-     * antes de volver al menú principal.
-     */
+	 * Finaliza el juego al alcanzar el nivel máximo. Detiene la producción pasiva,
+	 * muestra el mensaje de victoria, guarda la partida y el ranking, y lanza una
+	 * cuenta atrás de 5 segundos antes de volver al menú principal.
+	 */
 
 	private void terminarJuego() {
 		produccionPasiva.stop();
@@ -277,11 +268,11 @@ public class GameController {
 		countdown.setOnFinished(e -> volverAlMenu());
 		countdown.play();
 	}
-	
+
 	/**
-     * Bloquea los botones de mejora al terminar el juego,
-     * mostrando el texto "FIN" en el estado de cada mejora.
-     */
+	 * Bloquea los botones de mejora al terminar el juego, mostrando el texto "FIN"
+	 * en el estado de cada mejora.
+	 */
 
 	private void bloquearMejoras() {
 		lblRaspberryEstado.setText("FIN");
@@ -293,44 +284,43 @@ public class GameController {
 	}
 
 	/**
-     * Guarda la partida actual en MongoDB y actualiza el ranking.
-     * Vinculado al botón "Guardar" del menú desplegable.
-     */
-	
+	 * Guarda la partida actual en MongoDB y actualiza el ranking. Vinculado al
+	 * botón "Guardar" del menú desplegable.
+	 */
+
 	@FXML
 	private void guardar() {
-	    SoundController.playClick();
+		SoundController.playClick();
 
-	    partidaDao.guardar(partida);
-	    guardarEnRanking();
-	    terminalArea.appendText("> partida guardada\n");
+		partidaDao.guardar(partida);
+		guardarEnRanking();
+		terminalArea.appendText("> partida guardada\n");
 	}
 
 	/**
-     * Guarda la partida actual y vuelve al menú principal.
-     * Vinculado al botón "Guardar y salir" del menú desplegable.
-     */
-	
+	 * Guarda la partida actual y vuelve al menú principal. Vinculado al botón
+	 * "Guardar y salir" del menú desplegable.
+	 */
+
 	@FXML
 	private void guardarSalir() {
-	    SoundController.playClick();
+		SoundController.playClick();
 
-	    partidaDao.guardar(partida);
-	    guardarEnRanking();
-	    terminalArea.appendText("> partida guardada. Saliendo...\n");
-	    volverAlMenu();
+		partidaDao.guardar(partida);
+		guardarEnRanking();
+		terminalArea.appendText("> partida guardada. Saliendo...\n");
+		volverAlMenu();
 	}
-	
+
 	/**
-     * Muestra un diálogo de confirmación antes de salir sin guardar.
-     * Si el usuario confirma, vuelve al menú principal sin guardar los datos.
-     */
-	
+	 * Muestra un diálogo de confirmación antes de salir sin guardar. Si el usuario
+	 * confirma, vuelve al menú principal sin guardar los datos.
+	 */
+
 	@FXML
 	private void salir() {
 		SoundController.playClick();
 
-	  
 		Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
 		alerta.setTitle("Salir");
 		alerta.setHeaderText(null);
@@ -340,6 +330,9 @@ public class GameController {
 		alerta.getDialogPane().getStylesheets().add(getClass().getResource("/View/style.css").toExternalForm());
 
 		alerta.getDialogPane().getStyleClass().add("terminal-dialog");
+		Stage alertaStage = (Stage) alerta.getDialogPane().getScene().getWindow();
+		alertaStage.getIcons().addAll(new Image(getClass().getResourceAsStream("../imagenes/mascaraVerde.jpg")));
+
 		alerta.showAndWait().ifPresent(respuesta -> {
 			if (respuesta == ButtonType.OK) {
 				terminalArea.appendText("> saliendo sin guardar\n");
@@ -347,43 +340,43 @@ public class GameController {
 			}
 		});
 	}
-	
+
 	/**
-     * Navega de vuelta al menú principal.
-     * Detiene el timeline de producción pasiva antes de cambiar de escena.
-     */
+	 * Navega de vuelta al menú principal. Detiene el timeline de producción pasiva
+	 * antes de cambiar de escena.
+	 */
 
 	private void volverAlMenu() {
 
-	    if (produccionPasiva != null) {
-	        produccionPasiva.stop();
-	    }
+		if (produccionPasiva != null) {
+			produccionPasiva.stop();
+		}
 
-	    try {
-	        URL fxml = getClass().getResource("/View/Menu.fxml");
+		try {
+			URL fxml = getClass().getResource("/View/Menu.fxml");
 
-	        if (fxml == null) {
-	            throw new IOException("No se encontró Menu.fxml");
-	        }
+			if (fxml == null) {
+				throw new IOException("No se encontró Menu.fxml");
+			}
 
-	        FXMLLoader loader = new FXMLLoader(fxml);
-	        Parent root = loader.load();
+			FXMLLoader loader = new FXMLLoader(fxml);
+			Parent root = loader.load();
 
-	        Stage stage = (Stage) terminalArea.getScene().getWindow();
+			Stage stage = (Stage) terminalArea.getScene().getWindow();
 
-	        // Mantener la escena actual
-	        stage.getScene().setRoot(root);
+			// Mantener la escena actual
+			stage.getScene().setRoot(root);
 
-	    } catch (IOException e) {
-	        System.out.println("Error al volver al menú");
-	        e.printStackTrace();
-	    }
+		} catch (IOException e) {
+			System.out.println("Error al volver al menú");
+			e.printStackTrace();
+		}
 	}
-	
+
 	/**
-     * Actualiza todos los elementos visuales de la vista con el estado actual
-     * de la partida: DP, producción, nivel, precios de mejoras y barra de progreso.
-     */
+	 * Actualiza todos los elementos visuales de la vista con el estado actual de la
+	 * partida: DP, producción, nivel, precios de mejoras y barra de progreso.
+	 */
 
 	private void actualizarVista() {
 		lblDataPoints.setText(String.valueOf(partida.getDp()));
