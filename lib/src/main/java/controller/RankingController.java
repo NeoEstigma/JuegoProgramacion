@@ -134,7 +134,7 @@ public class RankingController {
 	
 	/**
      * Recarga los datos del ranking desde MongoDB y los muestra en la tabla.
-     * Limpia la lista actual antes de añadir los nuevos datos.
+     * Limpia la lista actual antes de añadir los nuevos datos y reproduce sonido.
      */
 
 	@FXML
@@ -147,7 +147,7 @@ public class RankingController {
 	}
 	
 	/**
-     * Muestra un diálogo de confirmación antes de eliminar todo el ranking.
+     * Muestra un diálogo de confirmación antes de eliminar todo el ranking y reproduce sonido.
      * Si el usuario confirma, borra todos los documentos de la colección
      * ranking en MongoDB y limpia la tabla.
      */
@@ -183,7 +183,7 @@ public class RankingController {
 	}
 	
 	/**
-     * Vuelve al menú principal cargando la vista Menu.fxml.
+     * Vuelve al menú principal cargando la vista Menu.fxml y reproduce sonido.
      */
 
 	@FXML

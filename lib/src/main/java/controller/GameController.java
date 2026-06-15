@@ -119,6 +119,7 @@ public class GameController {
 	 /**
      * Ejecuta un comando al pulsar el botón de hackear.
      * Suma los DP por clic al total acumulado y registra la acción en el terminal.
+     * Reproduce sonido de click al clicar
      */
 
 	@FXML
@@ -133,7 +134,7 @@ public class GameController {
 	}
 	
 	/**
-     * Compra la mejora Raspberry si hay suficientes DP.
+     * Compra la mejora Raspberry si hay suficientes DP y reproduce sonido.
      * Aumenta los DP por clic en 1.
      */
 
@@ -146,7 +147,7 @@ public class GameController {
 	}
 
 	/**
-     * Compra la mejora PC si hay suficientes DP.
+     * Compra la mejora PC si hay suficientes DP y reproduce sonido.
      * Aumenta los DP por clic en 5.
      */
 	
@@ -159,7 +160,7 @@ public class GameController {
 	}
 	
 	/**
-     * Compra la mejora Junior si hay suficientes DP.
+     * Compra la mejora Junior si hay suficientes DP y reproduce sonido.
      * Aumenta la producción pasiva en 10 DP/s.
      */
 	@FXML
@@ -171,7 +172,7 @@ public class GameController {
 	}
 	
 	/**
-     * Compra la mejora Senior si hay suficientes DP.
+     * Compra la mejora Senior si hay suficientes DP y reproduce sonido.
      * Aumenta la producción pasiva en 50 DP/s.
      */
 
@@ -184,7 +185,7 @@ public class GameController {
 	}
 	
 	/**
-     * Compra la mejora Máquina de Café si hay suficientes DP.
+     * Compra la mejora Máquina de Café si hay suficientes DP y reproduce sonido.
      * Aumenta la producción de Junior y Senior en un 3%.
      */
 
@@ -197,7 +198,7 @@ public class GameController {
 	}
 	
 	/**
-     * Compra la mejora RGBS si hay suficientes DP.
+     * Compra la mejora RGBS si hay suficientes DP y reproduce sonido.
      * Aumenta la producción de Junior y Senior en un 10%.
      */
 
@@ -211,6 +212,7 @@ public class GameController {
 	
 	/**
      * Intenta avanzar al siguiente nivel de acceso.
+     * Cuando valida que se puede pasar de nivel reproduce sonido.
      * Guarda el estado en el ranking antes de avanzar.
      * Si se alcanza el nivel máximo, finaliza el juego llamando al método terminarJuego.
      */
