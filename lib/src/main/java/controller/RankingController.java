@@ -139,6 +139,7 @@ public class RankingController {
 
 	@FXML
 	private void actualizarRanking() {
+		SoundController.playClick();
 		listaRanking.clear();
 		RankingDao rankingDao = new RankingDao();
 		List<Ranking> datos = rankingDao.obtenerTodos();
@@ -153,6 +154,7 @@ public class RankingController {
 
 	@FXML
 	private void eliminarRanking() {
+		SoundController.playClick();
 
 		Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
 
@@ -186,6 +188,7 @@ public class RankingController {
 
 	@FXML
 	private void volver() {
+		SoundController.playClick();
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("/View/Menu.fxml"));
 

@@ -123,7 +123,7 @@ public class GameController {
 
 	@FXML
 	private void clickHack() {
-	    SoundManager.playClick();
+	    SoundController.playClick();
 
 	    String msg = partida.click();
 	    if (msg != null) {
@@ -297,7 +297,7 @@ public class GameController {
 	
 	@FXML
 	private void guardar() {
-	    SoundManager.playClick();
+	    SoundController.playClick();
 
 	    partidaDao.guardar(partida);
 	    guardarEnRanking();
@@ -311,7 +311,7 @@ public class GameController {
 	
 	@FXML
 	private void guardarSalir() {
-	    SoundManager.playClick();
+	    SoundController.playClick();
 
 	    partidaDao.guardar(partida);
 	    guardarEnRanking();
@@ -326,7 +326,7 @@ public class GameController {
 	
 	@FXML
 	private void salir() {
-		SoundManager.playClick();
+		SoundController.playClick();
 
 	  
 		Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);

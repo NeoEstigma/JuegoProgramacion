@@ -2,25 +2,25 @@ package controller;
 
 import javafx.scene.media.AudioClip;
 
-public class SoundManager {
+public class SoundController {
 
     private static final AudioClip click =
-            new AudioClip(SoundManager.class.getResource("/sounds/click.mp3").toExternalForm());
+            new AudioClip(SoundController.class.getResource("/sounds/click.mp3").toExternalForm());
 
     private static final AudioClip mejora =
-            new AudioClip(SoundManager.class.getResource("/sounds/mejora.mp3").toExternalForm());
+            new AudioClip(SoundController.class.getResource("/sounds/mejora.mp3").toExternalForm());
 
     private static final AudioClip inicio =
-            new AudioClip(SoundManager.class.getResource("/sounds/inicio.mp3").toExternalForm());
+            new AudioClip(SoundController.class.getResource("/sounds/inicio.mp3").toExternalForm());
 
     private static final AudioClip final1 =
-            new AudioClip(SoundManager.class.getResource("/sounds/final1.mp3").toExternalForm());
+            new AudioClip(SoundController.class.getResource("/sounds/final1.mp3").toExternalForm());
 
     private static final AudioClip final2 =
-            new AudioClip(SoundManager.class.getResource("/sounds/final2.mp3").toExternalForm());
+            new AudioClip(SoundController.class.getResource("/sounds/final2.mp3").toExternalForm());
     private static final AudioClip error =
             new AudioClip(
-                SoundManager.class.getResource("/sounds/error.mp3")
+                SoundController.class.getResource("/sounds/error.mp3")
                 .toExternalForm());
 
     public static void playError() {
@@ -52,12 +52,20 @@ public class SoundManager {
         final2.play();
     }
 
+    private static boolean inicioSonando = false;
+
     public static void playInicio() {
-        inicio.play();
+        if (inicio != null && !inicioSonando) {
+            inicio.setVolume(0.5);
+            inicio.play();
+            inicioSonando = true;
+        }
     }
 
- 
     public static void stopInicio() {
-        inicio.stop();
+        if (inicio != null) {
+            inicio.stop();
+            inicioSonando = false;
+        }
     }
 }

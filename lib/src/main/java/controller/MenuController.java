@@ -40,7 +40,7 @@ public class MenuController {
 	
 	@FXML
 	public void initialize() {
-		SoundManager.playInicio();
+		SoundController.playInicio();
 		Partida guardada = partidaDao.cargarUnica();
 
 		if (guardada != null && guardada.estaTerminado()) {
@@ -59,8 +59,8 @@ public class MenuController {
 
 	@FXML
 	private void continuarPartida() {
-		SoundManager.playClick();
-		SoundManager.stopInicio();
+		SoundController.playClick();
+		SoundController.stopInicio();
 		
 		Partida guardada = partidaDao.cargarUnica();
 
@@ -79,7 +79,7 @@ public class MenuController {
 
 	@FXML
 	private void nuevaPartida() {
-		SoundManager.playClick();
+		SoundController.playClick();
 		TextInputDialog dialog = new TextInputDialog();
 
 		dialog.setTitle("Nueva partida");
@@ -101,7 +101,7 @@ public class MenuController {
 				partidaDao.eliminarUnica();
 				Partida.nuevaPartida(nombreLimpio);
 				cargarVista("/View/Game.fxml");
-				SoundManager.stopInicio();
+				SoundController.stopInicio();
 			}
 		});
 		
@@ -113,7 +113,6 @@ public class MenuController {
 
 	@FXML
 	private void mostrarRanking() {
-		SoundManager.playClick();
 		cargarVista("/View/Ranking.fxml");
 	}
 	
@@ -123,7 +122,7 @@ public class MenuController {
 
 	@FXML
 	private void salir() {
-		SoundManager.playClick();
+		SoundController.playClick();
 		Stage stage = (Stage) btnContinuar.getScene().getWindow();
 		stage.close();
 	}
