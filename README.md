@@ -184,7 +184,12 @@ Almacena resultados de partidas. Puede tener múltiples documentos.
 
 ## Capturas de pantalla
 
-> *(Añadir capturas de las vistas: Menú, Juego y Ranking)*
+![alt text](CapturaMenu.png)
+![alt text](pantallaJuego.png)
+![alt text](pantallaRanking.png)
+
+
+
 
 ---
 
