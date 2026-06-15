@@ -40,6 +40,7 @@ public class MenuController {
 	
 	@FXML
 	public void initialize() {
+		SoundManager.playInicio();
 		Partida guardada = partidaDao.cargarUnica();
 
 		if (guardada != null && guardada.estaTerminado()) {
@@ -58,6 +59,9 @@ public class MenuController {
 
 	@FXML
 	private void continuarPartida() {
+		SoundManager.playClick();
+		SoundManager.stopInicio();
+		
 		Partida guardada = partidaDao.cargarUnica();
 
 		if (guardada != null) {
@@ -75,6 +79,7 @@ public class MenuController {
 
 	@FXML
 	private void nuevaPartida() {
+		SoundManager.playClick();
 		TextInputDialog dialog = new TextInputDialog();
 
 		dialog.setTitle("Nueva partida");
@@ -96,8 +101,10 @@ public class MenuController {
 				partidaDao.eliminarUnica();
 				Partida.nuevaPartida(nombreLimpio);
 				cargarVista("/View/Game.fxml");
+				SoundManager.stopInicio();
 			}
 		});
+		
 	}
 	
 	/**
@@ -106,6 +113,7 @@ public class MenuController {
 
 	@FXML
 	private void mostrarRanking() {
+		SoundManager.playClick();
 		cargarVista("/View/Ranking.fxml");
 	}
 	
@@ -115,6 +123,7 @@ public class MenuController {
 
 	@FXML
 	private void salir() {
+		SoundManager.playClick();
 		Stage stage = (Stage) btnContinuar.getScene().getWindow();
 		stage.close();
 	}
@@ -127,26 +136,35 @@ public class MenuController {
      */
 
 	private void cargarVista(String ruta) {
-		try {
-			URL fxml = getClass().getResource(ruta);
-			if (fxml == null) {
-				throw new IOException("No se encontró el FXML: " + ruta);
-			}
+	    try {
+	        URL fxml = getClass().getResource(ruta);
 
-			FXMLLoader loader = new FXMLLoader(fxml);
-			Parent root = loader.load();
+	        if (fxml == null) {
+	            throw new IOException("No se encontró el FXML: " + ruta);
+	        }
 
-			Stage stage = (Stage) btnContinuar.getScene().getWindow();
+	        FXMLLoader loader = new FXMLLoader(fxml);
+	        Parent root = loader.load();
 
-			Scene nuevaEscena = new Scene(root);
-			nuevaEscena.getStylesheets().add(getClass().getResource("/View/style.css").toExternalForm());
+	        Stage stage = (Stage) btnContinuar.getScene().getWindow();
 
-			stage.setScene(nuevaEscena);
-			stage.setMaximized(true);
+	        Scene escenaActual = stage.getScene();
 
-		} catch (IOException e) {
-			System.out.println("Error al cargar vista: " + e.getMessage());
-			e.printStackTrace();
-		}
+	        if (escenaActual == null) {
+	            Scene nuevaEscena = new Scene(root);
+	            nuevaEscena.getStylesheets().add(
+	                getClass().getResource("/View/style.css").toExternalForm()
+	            );
+	            stage.setScene(nuevaEscena);
+	        } else {
+	            escenaActual.setRoot(root);
+	        }
+
+	        stage.setMaximized(true);
+
+	    } catch (IOException e) {
+	        System.out.println("Error al cargar vista: " + e.getMessage());
+	        e.printStackTrace();
+	    }
 	}
 }

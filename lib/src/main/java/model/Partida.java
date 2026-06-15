@@ -2,6 +2,8 @@ package model;
 
 import java.util.Date;
 
+import controller.SoundManager;
+
 /**
  * Clase principal del modelo de Terminal Clicker. Representa el estado completo
  * de una partida en curso e implementa toda la lógica del juego: acumulación de
@@ -195,10 +197,10 @@ public class Partida {
 
 			mejoras.setNumRaspberry(mejoras.getNumRaspberry() + 1);
 			mejoras.setPrecioRaspberry(aumentarPrecio(mejoras.getPrecioRaspberry(), 1.05));
-
+			 SoundManager.playMejora();
 			return "> Raspberry comprada. +1 DP por clic";
 		}
-
+		 SoundManager.playError();
 		return "> DP insuficientes para Raspberry";
 	}
 
@@ -219,10 +221,10 @@ public class Partida {
 
 			mejoras.setNumPC(mejoras.getNumPC() + 1);
 			mejoras.setPrecioPc(aumentarPrecio(mejoras.getPrecioPc(), 1.06));
-
+			SoundManager.playMejora();
 			return "> PC comprado. +5 DP por clic";
 		}
-
+		 SoundManager.playError();
 		return "> DP insuficientes para PC";
 	}
 
@@ -243,10 +245,10 @@ public class Partida {
 
 			mejoras.setNumJunior(mejoras.getNumJunior() + 1);
 			mejoras.setPrecioJunior(aumentarPrecio(mejoras.getPrecioJunior(), 1.08));
-
+			SoundManager.playMejora();
 			return "> Junior comprado. +10 DP/s";
 		}
-
+		 SoundManager.playError();
 		return "> DP insuficientes para Junior";
 	}
 
@@ -267,10 +269,10 @@ public class Partida {
 
 			mejoras.setNumSenior(mejoras.getNumSenior() + 1);
 			mejoras.setPrecioSenior(aumentarPrecio(mejoras.getPrecioSenior(), 1.10));
-
+			SoundManager.playMejora();
 			return "> Senior comprado. +50 DP/s";
 		}
-
+		 SoundManager.playError();
 		return "> DP insuficientes para Senior";
 	}
 
@@ -293,10 +295,10 @@ public class Partida {
 
 			mejoras.setNumMaqCafe(mejoras.getNumMaqCafe() + 1);
 			mejoras.setPrecioCafe(aumentarPrecio(mejoras.getPrecioCafe(), 1.35));
-
+			SoundManager.playMejora();
 			return "> Coffee comprado. +3% produccion. +" + aumento + " DP/s";
 		}
-
+		 SoundManager.playError();
 		return "> DP insuficientes para Coffee";
 	}
 
@@ -319,10 +321,10 @@ public class Partida {
 
 			mejoras.setNumRGBS(mejoras.getNumRGBS() + 1);
 			mejoras.setPrecioRgbs(aumentarPrecio(mejoras.getPrecioRgbs(), 1.50));
-
+			SoundManager.playMejora();
 			return "> RGBS comprado. +10% produccion. +" + aumento + " DP/s";
 		}
-
+		 SoundManager.playError();
 		return "> DP insuficientes para RGBS";
 	}
 
@@ -350,10 +352,12 @@ public class Partida {
 			nivel++;
 
 			progresoMaximo = aumentarPrecio(progresoMaximo, 2.2);
-
+			
+			SoundManager.playFinal1();
+			SoundManager.playFinal2();
 			return "> Nuevo rango desbloqueado: " + getNombreNivel();
 		}
-
+		 SoundManager.playError();
 		return "> Necesitas " + progresoMaximo + " DP para avanzar";
 	}
 

@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+
 import java.net.URL;
 
 import javafx.animation.KeyFrame;
@@ -8,7 +9,6 @@ import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
@@ -123,11 +123,13 @@ public class GameController {
 
 	@FXML
 	private void clickHack() {
-		String msg = partida.click();
-		if (msg != null) {
-			terminalArea.appendText(msg + "\n");
-		}
-		actualizarVista();
+	    SoundManager.playClick();
+
+	    String msg = partida.click();
+	    if (msg != null) {
+	        terminalArea.appendText(msg + "\n");
+	    }
+	    actualizarVista();
 	}
 	
 	/**
@@ -137,8 +139,10 @@ public class GameController {
 
 	@FXML
 	private void comprarRaspberry() {
-		terminalArea.appendText(partida.comprarRaspberry() + "\n");
-		actualizarVista();
+		
+
+	    terminalArea.appendText(partida.comprarRaspberry() + "\n");
+	    actualizarVista();
 	}
 
 	/**
@@ -148,19 +152,22 @@ public class GameController {
 	
 	@FXML
 	private void comprarPc() {
-		terminalArea.appendText(partida.comprarPc() + "\n");
-		actualizarVista();
+		 
+
+	    terminalArea.appendText(partida.comprarPc() + "\n");
+	    actualizarVista();
 	}
 	
 	/**
      * Compra la mejora Junior si hay suficientes DP.
      * Aumenta la producción pasiva en 10 DP/s.
      */
-
 	@FXML
 	private void comprarJunior() {
-		terminalArea.appendText(partida.comprarJunior() + "\n");
-		actualizarVista();
+		
+
+	    terminalArea.appendText(partida.comprarJunior() + "\n");
+	    actualizarVista();
 	}
 	
 	/**
@@ -170,8 +177,10 @@ public class GameController {
 
 	@FXML
 	private void comprarSenior() {
-		terminalArea.appendText(partida.comprarSenior() + "\n");
-		actualizarVista();
+	
+
+	    terminalArea.appendText(partida.comprarSenior() + "\n");
+	    actualizarVista();
 	}
 	
 	/**
@@ -181,8 +190,10 @@ public class GameController {
 
 	@FXML
 	private void comprarCafe() {
-		terminalArea.appendText(partida.comprarCafe() + "\n");
-		actualizarVista();
+		
+
+	    terminalArea.appendText(partida.comprarCafe() + "\n");
+	    actualizarVista();
 	}
 	
 	/**
@@ -192,8 +203,10 @@ public class GameController {
 
 	@FXML
 	private void comprarRgbs() {
-		terminalArea.appendText(partida.comprarRgbs() + "\n");
-		actualizarVista();
+		 
+
+	    terminalArea.appendText(partida.comprarRgbs() + "\n");
+	    actualizarVista();
 	}
 	
 	/**
@@ -201,17 +214,22 @@ public class GameController {
      * Guarda el estado en el ranking antes de avanzar.
      * Si se alcanza el nivel máximo, finaliza el juego llamando al método terminarJuego.
      */
-
 	@FXML
 	private void avanzarProgreso() {
-		guardarEnRanking();
-		String msg = partida.avanzarProgreso();
-		if ("FIN".equals(msg)) {
-			terminarJuego();
-		} else {
-			terminalArea.appendText(msg + "\n");
-		}
-		actualizarVista();
+		
+	    guardarEnRanking();
+	    
+	    String msg = partida.avanzarProgreso();
+
+	    if ("FIN".equals(msg)) {
+	        terminarJuego();
+	        
+	    } else {
+	        terminalArea.appendText(msg + "\n");
+	    }
+
+	    actualizarVista();
+	    
 	}
 	
 	/**
@@ -279,9 +297,11 @@ public class GameController {
 	
 	@FXML
 	private void guardar() {
-		partidaDao.guardar(partida);
-		guardarEnRanking();
-		terminalArea.appendText("> partida guardada\n");
+	    SoundManager.playClick();
+
+	    partidaDao.guardar(partida);
+	    guardarEnRanking();
+	    terminalArea.appendText("> partida guardada\n");
 	}
 
 	/**
@@ -291,10 +311,12 @@ public class GameController {
 	
 	@FXML
 	private void guardarSalir() {
-		partidaDao.guardar(partida);
-		guardarEnRanking();
-		terminalArea.appendText("> partida guardada. Saliendo...\n");
-		volverAlMenu();
+	    SoundManager.playClick();
+
+	    partidaDao.guardar(partida);
+	    guardarEnRanking();
+	    terminalArea.appendText("> partida guardada. Saliendo...\n");
+	    volverAlMenu();
 	}
 	
 	/**
@@ -304,6 +326,9 @@ public class GameController {
 	
 	@FXML
 	private void salir() {
+		SoundManager.playClick();
+
+	  
 		Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
 		alerta.setTitle("Salir");
 		alerta.setHeaderText(null);
@@ -327,30 +352,30 @@ public class GameController {
      */
 
 	private void volverAlMenu() {
-		if (produccionPasiva != null) {
-			produccionPasiva.stop();
-		}
 
-		try {
-			URL fxml = getClass().getResource("/View/Menu.fxml");
-			if (fxml == null) {
-				throw new IOException("No se encontró Menu.fxml");
-			}
+	    if (produccionPasiva != null) {
+	        produccionPasiva.stop();
+	    }
 
-			FXMLLoader loader = new FXMLLoader(fxml);
-			Parent root = loader.load();
+	    try {
+	        URL fxml = getClass().getResource("/View/Menu.fxml");
 
-			Stage stage = (Stage) terminalArea.getScene().getWindow();
+	        if (fxml == null) {
+	            throw new IOException("No se encontró Menu.fxml");
+	        }
 
-			Scene nuevaEscena = new Scene(root);
-			nuevaEscena.getStylesheets().add(getClass().getResource("/View/style.css").toExternalForm());
+	        FXMLLoader loader = new FXMLLoader(fxml);
+	        Parent root = loader.load();
 
-			stage.setScene(nuevaEscena);
-			stage.setMaximized(true);
+	        Stage stage = (Stage) terminalArea.getScene().getWindow();
 
-		} catch (IOException e) {
-			System.out.println("Error al volver al menú");
-		}
+	        // Mantener la escena actual
+	        stage.getScene().setRoot(root);
+
+	    } catch (IOException e) {
+	        System.out.println("Error al volver al menú");
+	        e.printStackTrace();
+	    }
 	}
 	
 	/**
