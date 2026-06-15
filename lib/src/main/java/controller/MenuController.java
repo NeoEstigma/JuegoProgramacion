@@ -79,32 +79,34 @@ public class MenuController {
 
 	@FXML
 	private void nuevaPartida() {
-		SoundController.playClick();
-		TextInputDialog dialog = new TextInputDialog();
 
-		dialog.setTitle("Nueva partida");
-		dialog.setHeaderText(null);
-		dialog.setContentText("Introduce tu nombre:");
+	    Stage stage = (Stage) btnContinuar.getScene().getWindow();
 
-		dialog.setGraphic(null);
+	    TextInputDialog dialog = new TextInputDialog();
 
-		dialog.getDialogPane().getStylesheets().add(getClass().getResource("/View/style.css").toExternalForm());
+	    dialog.setTitle("Nueva partida");
+	    dialog.setHeaderText(null);
+	    dialog.setContentText("Introduce tu nombre:");
+	    dialog.setGraphic(null);
 
-		dialog.getDialogPane().getStyleClass().add("terminal-dialog");
+	    dialog.getDialogPane().getStylesheets().add(
+	        getClass().getResource("/View/style.css").toExternalForm()
+	    );
 
-		Optional<String> resultado = dialog.showAndWait();
+	    dialog.getDialogPane().getStyleClass().add("terminal-dialog");
 
-		resultado.ifPresent(nombre -> {
-			String nombreLimpio = nombre.trim();
+	    Optional<String> resultado = dialog.showAndWait();
 
-			if (!nombreLimpio.isEmpty()) {
-				partidaDao.eliminarUnica();
-				Partida.nuevaPartida(nombreLimpio);
-				cargarVista("/View/Game.fxml");
-				SoundController.stopInicio();
-			}
-		});
-		
+	    resultado.ifPresent(nombre -> {
+	        String nombreLimpio = nombre.trim();
+
+	        if (!nombreLimpio.isEmpty()) {
+	            SoundController.stopInicio();
+	            partidaDao.eliminarUnica();
+	            Partida.nuevaPartida(nombreLimpio);
+	            cargarVista("/View/Game.fxml");
+	        }
+	    });
 	}
 	
 	/**

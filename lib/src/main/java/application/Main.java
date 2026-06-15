@@ -1,6 +1,7 @@
 package application;
 
 import java.net.URL;
+import javafx.scene.input.KeyCombination;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -50,7 +51,6 @@ public class Main extends Application {
             primaryStage.setMaximized(true);
 
             primaryStage.show();
-
         } catch (Exception e) {
 
             System.out.println("===== ERROR =====");
